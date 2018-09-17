@@ -71,7 +71,7 @@ namespace Login
             DataSet tb = new DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.titulo,p.codigo FROM prova p LEFT JOIN provasfinalizadas pf ON p.codigo=pf.codigo_prova WHERE pf.codigo_prova IS NULL", con);
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.titulo FROM prova p LEFT JOIN provasfinalizadas pf ON p.codigo=pf.codigo_prova WHERE pf.codigo_prova IS NULL", con);
             da.Fill(tb,"aluno");
             int a=0;
             while (tb.Tables["aluno"].Rows.Count > a)
