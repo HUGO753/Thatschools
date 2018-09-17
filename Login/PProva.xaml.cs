@@ -39,15 +39,27 @@ namespace Login
             {
                 DataSet tb = new DataSet();
                 OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
-                OleDbCommand cmd = new OleDbCommand("INSERT INTO prova(codigo_prof,titulo,texto,tempo) VALUES (" + codigo + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ")");
-                cmd.Connection = con;
                 con.Open();
-                cmd.ExecuteNonQuery();
+                OleDbDataAdapter da = new OleDbDataAdapter("SELECT titulo FROM prova WHERE titulo='"+Titulo.Text+"';", con);
+                da.Fill(tb, "professor");
                 con.Close();
-                Titulo.Text = "";
-                Texto.Text = "";
-                tp_hr.Text = "00";
-                tp_mn.Text = "00";
+                if (tb.Tables["professor"].Rows.Count > 0)
+                {
+                    MessageBox.Show("Já existe esse titulo! Insira o outro titulo!");
+                }
+                else
+                {
+                    OleDbCommand cmd = new OleDbCommand("INSERT INTO prova(codigo_prof,titulo,texto,tempo) VALUES (" + codigo + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ")");
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    Titulo.Text = "";
+                    Texto.Text = "";
+                    tp_hr.Text = "00";
+                    tp_mn.Text = "00";
+                    MessageBox.Show("Inserido com sucesso!");
+                }
             }
             else
             {
