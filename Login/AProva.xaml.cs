@@ -45,6 +45,13 @@ namespace Login
             InserirContagem();
             
         }
+        void limpar()
+        {
+            Texto.Text = "";
+            Titulo.Text = "";
+            listadeprovas.Text = "";
+            tempo.Content = "00:00";
+        }
         void InserirContagem()
         {
             if (min < 10)
@@ -60,6 +67,7 @@ namespace Login
         }
         void Encher()
         {
+            listadeprovas.Items.Clear();
             DataSet tb = new DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
             con.Open();
@@ -78,6 +86,7 @@ namespace Login
             DataSet tb = new DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
             con.Open();
+            Titulo.Text = listadeprovas.SelectedItem.ToString();
             OleDbDataAdapter da = new OleDbDataAdapter("SELECT codigo,texto,tempo FROM prova WHERE titulo='"+Titulo.Text+"';", con);
             da.Fill(tb, "aluno");
             Texto.Text = tb.Tables["aluno"].Rows[0]["texto"].ToString();
@@ -92,10 +101,6 @@ namespace Login
             comecar.IsEnabled = false;
         }
 
-        private void listadeprovas_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Titulo.Text = listadeprovas.SelectedItem.ToString();
-        }
 
         private void button_Copy1_Click(object sender, RoutedEventArgs e)
         {
@@ -112,7 +117,7 @@ namespace Login
                 cmd.ExecuteNonQuery();
                 con.Close();
                 Encher();
-                tempo.Content = "00:00";
+                limpar();
             }
         }
     }

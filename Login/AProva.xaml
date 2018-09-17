@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AProva" Height="331.933" Width="538.891">
     <Grid>
-        <ComboBox x:Name="listadeprovas" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="136" SelectionChanged="listadeprovas_SelectionChanged"/>
+        <ComboBox x:Name="listadeprovas" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="136"/>
         <Label x:Name="label" Content="Titulo" HorizontalAlignment="Left" Margin="157,0,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Tempo de prova" HorizontalAlignment="Left" Margin="37,65,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="83" FontSize="10">
             <Label.RenderTransform>
