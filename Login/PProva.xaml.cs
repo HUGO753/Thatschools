@@ -40,7 +40,7 @@ namespace Login
                 DataSet tb = new DataSet();
                 OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
                 con.Open();
-                OleDbDataAdapter da = new OleDbDataAdapter("SELECT titulo FROM prova WHERE titulo='"+Titulo.Text+"';", con);
+                OleDbDataAdapter da = new OleDbDataAdapter("SELECT titulo, codigo_prof FROM prova WHERE titulo='"+Titulo.Text+"' AND codigo_prof =" + codigo + ";", con);
                 da.Fill(tb, "professor");
                 con.Close();
                 if (tb.Tables["professor"].Rows.Count > 0)
