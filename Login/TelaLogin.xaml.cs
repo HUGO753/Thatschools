@@ -32,14 +32,14 @@ namespace Login
             if (tbusuario.Text !="" && tbsenha.Password != "")
             {
                 DataSet tb = new DataSet();
-                OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\0040481621005\Documents\Visual Studio 2015\Projects\Thatschool\bd.accdb"); // Conecta ao banco de dados
+                OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
 
                 OleDbCommand cmd = con.CreateCommand();
                 con.Open();
 
-                OleDbDataAdapter da = new OleDbDataAdapter("SELECT tipo FROM usuarios WHERE usuario='" + tbusuario.Text + "' AND senha='" + tbsenha.Password + "'", con);
+                OleDbDataAdapter da = new OleDbDataAdapter("SELECT tipo,cod FROM usuarios WHERE usuario='" + tbusuario.Text + "' AND senha='" + tbsenha.Password + "'", con);
                 da.Fill(tb, "0");
-                if (tb.Tables["0"].Rows.Count>0) MessageBox.Show("Usuario: " + tb.Tables["0"].Rows[0]["tipo"] + "");
+                if (tb.Tables["0"].Rows.Count>0) switch (tb.Tables["0"].Rows[0]["tipo"].ToString()) { case "1": AMenu tela1 = new AMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela1.Show(); this.Close(); break; case "2": PMenu tela2 = new PMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela2.Show(); this.Close(); break; case "3": SMenu tela3 = new SMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela3.Show(); this.Close(); break; }
                 else MessageBox.Show("Não existes");
                 con.Close();
             }else
