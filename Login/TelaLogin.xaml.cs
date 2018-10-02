@@ -32,7 +32,7 @@ namespace Login
             if (tbusuario.Text !="" && tbsenha.Password != "")
             {
                 DataSet tb = new DataSet();
-                OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
+                OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = "+ System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
 
                 OleDbCommand cmd = con.CreateCommand();
                 con.Open();
@@ -48,10 +48,10 @@ namespace Login
             }
         }
 
-        private void textBlock_MouseEnter(object sender, MouseEventArgs e)
+
+        private void textBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Cursor = Cursors.Hand;
-            textBlock.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF00AEFF"));
+            MessageBox.Show("Ir para um lugar");
         }
 
         private void textBlock_MouseLeave(object sender, MouseEventArgs e)
@@ -60,9 +60,10 @@ namespace Login
             textBlock.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0074FF"));
         }
 
-        private void textBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void textBlock_MouseEnter(object sender, MouseEventArgs e)
         {
-            MessageBox.Show("Ir para um lugar");
+            this.Cursor = Cursors.Hand;
+            textBlock.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF00AEFF"));
         }
     }
 }

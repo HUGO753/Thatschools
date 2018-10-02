@@ -25,5 +25,11 @@ namespace Login
             InitializeComponent();
             codigo = cod;
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            Cadastrar w = new Cadastrar();
+            w.Show();
+        }
     }
 }

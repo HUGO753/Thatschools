@@ -69,7 +69,7 @@ namespace Login
         {
             listadeprovas.Items.Clear();
             DataSet tb = new DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
+            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
             OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.titulo FROM prova p LEFT JOIN provasfinalizadas pf ON p.codigo=pf.codigo_prova WHERE pf.codigo_prova IS NULL", con);
             da.Fill(tb,"aluno");
@@ -84,9 +84,9 @@ namespace Login
         private void button_Click(object sender, RoutedEventArgs e)
         {
             DataSet tb = new DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
+            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0;Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
-            Titulo.Text = listadeprovas.SelectedItem.ToString();
+            Titulo.Text = listadeprovas.Text;
             OleDbDataAdapter da = new OleDbDataAdapter("SELECT codigo,texto,tempo FROM prova WHERE titulo='"+Titulo.Text+"';", con);
             da.Fill(tb, "aluno");
             Texto.Text = tb.Tables["aluno"].Rows[0]["texto"].ToString();
@@ -110,7 +110,7 @@ namespace Login
                 comecar.IsEnabled = true;
                 listadeprovas.IsEnabled = true;
                 temp.Stop();
-                OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Hugo\Desktop\Thatschool\bd.accdb"); // Conecta ao banco de dados
+                OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
                 OleDbCommand cmd = new OleDbCommand("INSERT INTO provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + codigo + "," + codigo_prova + ",'" + Texto.Text + "');");
                 cmd.Connection = con;
                 con.Open();

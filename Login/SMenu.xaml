@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="SMenu" Height="300" Width="300">
+        Title="SMenu" Height="353.192" Width="579.787">
     <Grid>
-        
+        <Button x:Name="button" Content="Cadastro" HorizontalAlignment="Left" Margin="26,60,0,0" VerticalAlignment="Top" Width="108" Height="42" Click="button_Click"/>
+        <Button x:Name="button1" Content="Visualizar notas" HorizontalAlignment="Left" Margin="176,60,0,0" VerticalAlignment="Top" Width="108" Height="42"/>
     </Grid>
 </Window>

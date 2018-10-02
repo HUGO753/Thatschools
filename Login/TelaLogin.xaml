@@ -12,12 +12,12 @@
         </Grid.ColumnDefinitions>
         <TextBox x:Name="tbusuario" HorizontalAlignment="Left" Height="23" Margin="34,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"/>
         <PasswordBox x:Name="tbsenha" Margin="34,165,61,0" VerticalAlignment="Top" Height="20"/>
-        <Button x:Name="button" Content="Entrar" HorizontalAlignment="Left" Margin="159,198,0,0" VerticalAlignment="Top" Width="54" Height="26" Click="button_Click"/>
+        <Button x:Name="button" Content="Entrar" HorizontalAlignment="Left" Margin="159,198,0,0" VerticalAlignment="Top" Width="54" Height="26" Click="button_Click" IsDefault="True"/>
 
         <Label x:Name="label1" Content="Usuario" HorizontalAlignment="Left" Margin="34,65,0,0" VerticalAlignment="Top" Height="26" Width="50"/>
         <Label x:Name="label2" Content="Senha" HorizontalAlignment="Left" Margin="34,134,0,0" VerticalAlignment="Top" Height="26" Width="50"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="34,208,0,0" TextWrapping="Wrap" Text="Esqueci a Senha" VerticalAlignment="Top" TextDecorations="Underline" Foreground="#FF0074FF" MouseEnter="textBlock_MouseEnter" MouseLeave="textBlock_MouseLeave" MouseLeftButtonDown="textBlock_MouseLeftButtonDown"/>
         <Image x:Name="logo_png" Margin="24,15,87,187" Source="logo.png" Stretch="Fill" RenderTransformOrigin="-0.045,0.36"/>
-
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="34,208,0,0" TextWrapping="Wrap" Text="Esqueci a Senha" VerticalAlignment="Top" TextDecorations="Underline" Foreground="#FF0074FF" MouseLeftButtonDown="textBlock_MouseLeftButtonDown" MouseLeave="textBlock_MouseLeave" MouseEnter="textBlock_MouseEnter"/>
+   
     </Grid>
 </Window>
