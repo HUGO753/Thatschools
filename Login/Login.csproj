@@ -59,6 +59,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CorrecaoProva.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotaAluno.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PProva.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,6 +93,12 @@
     </Page>
     <Compile Include="Cadastrar.xaml.cs">
       <DependentUpon>Cadastrar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CorrecaoProva.xaml.cs">
+      <DependentUpon>CorrecaoProva.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotaAluno.xaml.cs">
+      <DependentUpon>NotaAluno.xaml</DependentUpon>
     </Compile>
     <Compile Include="PProva.xaml.cs">
       <DependentUpon>PProva.xaml</DependentUpon>

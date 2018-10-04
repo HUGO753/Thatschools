@@ -19,6 +19,7 @@ namespace Login
     /// </summary>
     public partial class Cadastrar : Window
     {
+        bool foi=false;
         public Cadastrar()
         {
             InitializeComponent();
@@ -26,33 +27,57 @@ namespace Login
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch(comboBox.Text)
+            foi = true;
+        }
+
+        private void comboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if (foi == true)
             {
-                case "Aluno":
-                    Cad_aluno.Visibility = Visibility.Visible;
-                    Cad_Professor.Visibility = Visibility.Hidden;
-                    Cad_secretaria.Visibility = Visibility.Hidden;
-                    break;
-                case "Professor":
-                    Cad_aluno.Visibility = Visibility.Hidden;
-                    Cad_Professor.Visibility = Visibility.Visible;
-                    Cad_secretaria.Visibility = Visibility.Hidden;
-                    break;
-                case "Secretario":
-                    Cad_aluno.Visibility = Visibility.Hidden;
-                    Cad_Professor.Visibility = Visibility.Hidden;
-                    Cad_secretaria.Visibility = Visibility.Visible;
-                    break;
-                case "Turma":
+                switch (comboBox.Text)
+                {
+                    case "Aluno":
+                        Cad_aluno.Visibility = Visibility.Visible;
+                        Cad_Professor.Visibility = Visibility.Hidden;
+                        Cad_secretaria.Visibility = Visibility.Hidden;
+                        break;
+                    case "Professor":
+                        Cad_aluno.Visibility = Visibility.Hidden;
+                        Cad_Professor.Visibility = Visibility.Visible;
+                        Cad_secretaria.Visibility = Visibility.Hidden;
+                        break;
+                    case "Secretario":
+                        Cad_aluno.Visibility = Visibility.Hidden;
+                        Cad_Professor.Visibility = Visibility.Hidden;
+                        Cad_secretaria.Visibility = Visibility.Visible;
+                        break;
+                    case "Turma":
 
-                    break;
-                case "Curso":
+                        break;
+                    case "Curso":
 
-                    break;
-                case "Matricula":
+                        break;
+                    case "Matricula":
 
-                    break;
+                        break;
+                }
+                foi = false;
             }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
