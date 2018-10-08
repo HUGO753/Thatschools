@@ -12,7 +12,7 @@
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="328,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272"/>
         <Label x:Name="label" Content="Nome do aluno:" HorizontalAlignment="Left" Margin="218,24,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Button x:Name="button" Content="Avaliar" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" Width="118" Height="37" FontSize="16"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="67,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68" TextChanged="textBox1_TextChanged"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="67,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
         <Label x:Name="label_Copy" Content="Nota:" HorizontalAlignment="Left" Margin="8,122,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="label_Copy1" Content="&lt;" HorizontalAlignment="Left" Margin="79,197,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy2" Content="&gt;" HorizontalAlignment="Left" Margin="102,197,0,0" VerticalAlignment="Top"/>
