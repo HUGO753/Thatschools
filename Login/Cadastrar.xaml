@@ -22,9 +22,12 @@
             <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="129,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label x:Name="label2_Copy1" Content="Cidade:" HorizontalAlignment="Left" Margin="20,133,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label2_Copy" Content="Endereço:" HorizontalAlignment="Left" Margin="20,96,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label2" Content="Sexo:&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="20,56,0,0" VerticalAlignment="Top" Height="23" Width="73"/>
+            <Label x:Name="label2" Content="Sexo:" HorizontalAlignment="Left" Margin="20,56,0,0" VerticalAlignment="Top" Height="23" Width="73"/>
             <Label x:Name="label1" Content="Nome Completo:&#xD;&#xA;" HorizontalAlignment="Left" Margin="20,19,0,0" VerticalAlignment="Top" Height="32"/>
-            <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="129,57,0,0" VerticalAlignment="Top" Width="120"/>
+            <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="129,57,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBoxItem Content="Feminino"/>
+                <ComboBoxItem Content="Masculino"/>
+            </ComboBox>
             <Label x:Name="label5" Content="UF:" HorizontalAlignment="Left" Margin="285,133,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="355,133,0,0" VerticalAlignment="Top" Width="61"/>
             <Label x:Name="label7" Content="RG:" HorizontalAlignment="Left" Margin="20,173,0,0" VerticalAlignment="Top"/>
@@ -46,35 +49,7 @@
             <TextBox x:Name="textBox7" HorizontalAlignment="Left" Height="23" Margin="141,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="textBox8" HorizontalAlignment="Left" Height="23" Margin="141,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="textBox9" HorizontalAlignment="Left" Height="23" Margin="398,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="398,118,0,0" VerticalAlignment="Top" Width="62">
-                <ComboBoxItem Content="AC"/>
-                <ComboBoxItem Content="AL"/>
-                <ComboBoxItem Content="AP"/>
-                <ComboBoxItem Content="AM"/>
-                <ComboBoxItem Content="BA"/>
-                <ComboBoxItem Content="CE"/>
-                <ComboBoxItem Content="DF"/>
-                <ComboBoxItem Content="ES"/>
-                <ComboBoxItem Content="GO"/>
-                <ComboBoxItem Content="MA"/>
-                <ComboBoxItem Content="MT"/>
-                <ComboBoxItem Content="MS"/>
-                <ComboBoxItem Content="MG"/>
-                <ComboBoxItem Content="PA"/>
-                <ComboBoxItem Content="PB"/>
-                <ComboBoxItem Content="PR"/>
-                <ComboBoxItem Content="PE"/>
-                <ComboBoxItem Content="PI"/>
-                <ComboBoxItem Content="RJ"/>
-                <ComboBoxItem Content="RN"/>
-                <ComboBoxItem Content="RS"/>
-                <ComboBoxItem Content="RO"/>
-                <ComboBoxItem Content="RR"/>
-                <ComboBoxItem Content="SC"/>
-                <ComboBoxItem Content="SP"/>
-                <ComboBoxItem Content="SE"/>
-                <ComboBoxItem Content="TO"/>
-            </ComboBox>
+            <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="398,118,0,0" VerticalAlignment="Top" Width="62"/>
             <ComboBox x:Name="comboBox4" HorizontalAlignment="Left" Margin="141,52,0,0" VerticalAlignment="Top" Width="120">
                 <ComboBoxItem Content="Feminino"/>
                 <ComboBoxItem Content="Masculino"/>
@@ -108,35 +83,7 @@
                 <ComboBoxItem Content="Feminino"/>
                 <ComboBoxItem Content="Masculino"/>
             </ComboBox>
-            <ComboBox x:Name="comboBox7" HorizontalAlignment="Left" Margin="408,117,0,0" VerticalAlignment="Top" Width="69">
-                <ComboBoxItem Content="AC"/>
-                <ComboBoxItem Content="AL"/>
-                <ComboBoxItem Content="AP"/>
-                <ComboBoxItem Content="AM"/>
-                <ComboBoxItem Content="BA"/>
-                <ComboBoxItem Content="CE"/>
-                <ComboBoxItem Content="DF"/>
-                <ComboBoxItem Content="ES"/>
-                <ComboBoxItem Content="GO"/>
-                <ComboBoxItem Content="MA"/>
-                <ComboBoxItem Content="MT"/>
-                <ComboBoxItem Content="MS"/>
-                <ComboBoxItem Content="MG"/>
-                <ComboBoxItem Content="PA"/>
-                <ComboBoxItem Content="PB"/>
-                <ComboBoxItem Content="PR"/>
-                <ComboBoxItem Content="PE"/>
-                <ComboBoxItem Content="PI"/>
-                <ComboBoxItem Content="RJ"/>
-                <ComboBoxItem Content="RN"/>
-                <ComboBoxItem Content="RS"/>
-                <ComboBoxItem Content="RO"/>
-                <ComboBoxItem Content="RR"/>
-                <ComboBoxItem Content="SC"/>
-                <ComboBoxItem Content="SP"/>
-                <ComboBoxItem Content="SE"/>
-                <ComboBoxItem Content="TO"/>
-            </ComboBox>
+            <ComboBox x:Name="comboBox7" HorizontalAlignment="Left" Margin="408,117,0,0" VerticalAlignment="Top" Width="69"/>
             <Label x:Name="label4_Copy6" Content="Senha:" HorizontalAlignment="Left" Margin="300,77,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.429"/>
             <Label x:Name="label4_Copy7" Content="Nome de usuário:" HorizontalAlignment="Left" Margin="299,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.02,0.429"/>
             <TextBox x:Name="textBox11" HorizontalAlignment="Left" Height="23" Margin="408,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -171,11 +118,13 @@
             <Label x:Name="label18" Content="Materia:" HorizontalAlignment="Left" Margin="37,73,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="84,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="142"/>
             <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="23" Margin="87,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="287"/>
-            <ComboBox x:Name="comboBox13" HorizontalAlignment="Left" Margin="95,77,0,0" VerticalAlignment="Top" Width="164"/>
+            <ComboBox x:Name="comboBox13" HorizontalAlignment="Left" Margin="95,73,0,0" VerticalAlignment="Top" Width="164"/>
             <Button x:Name="button5" Content="Procurar" HorizontalAlignment="Left" Margin="252,16,0,0" VerticalAlignment="Top" Width="75" Click="button5_Click"/>
             <Button x:Name="button6" Content="Cadastrar" HorizontalAlignment="Left" Margin="299,79,0,0" VerticalAlignment="Top" Width="75" Click="button6_Click"/>
+            <Label x:Name="label17" Content="Professor:" HorizontalAlignment="Left" Margin="37,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.778,0.527"/>
+            <ComboBox x:Name="comboBox12" HorizontalAlignment="Left" Margin="104,121,0,0" VerticalAlignment="Top" Width="155"/>
 
         </Grid>
-        
+
     </Grid>
 </Window>
