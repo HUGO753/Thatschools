@@ -16,7 +16,7 @@
             <ComboBoxItem Cursor="Hand" Content="Matricula"/>
         </ComboBox>
         <Label x:Name="label" Content="Selecione o tipo de usuário à cadastrar" HorizontalAlignment="Left" Margin="136,15,0,0" VerticalAlignment="Top" Width="219" Height="26"/>
-        <Grid x:Name="Cad_aluno" HorizontalAlignment="Left" Height="252" Margin="10,108,0,0" VerticalAlignment="Top" Width="537" UseLayoutRounding="False" Visibility="Visible">
+        <Grid x:Name="Cad_aluno" HorizontalAlignment="Left" Height="252" Margin="10,108,0,0" VerticalAlignment="Top" Width="537" UseLayoutRounding="False" Visibility="Hidden">
             <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="129,19,134,210"/>
             <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="129,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="129,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -165,7 +165,15 @@
             <Label x:Name="label16" Content="Curso" HorizontalAlignment="Left" Margin="50,151,0,0" VerticalAlignment="Top"/>
             <Button x:Name="button4" Content="Cadastrar" HorizontalAlignment="Left" Margin="397,43,0,0" VerticalAlignment="Top" Width="75" Click="button4_Click"/>
         </Grid>
-        <Grid x:Name="Cad_matricula" HorizontalAlignment="Left" Height="218" Margin="10,142,0,0" VerticalAlignment="Top" Width="537" Visibility="Hidden">
+        <Grid x:Name="Cad_matricula" HorizontalAlignment="Left" Height="218" Margin="10,142,0,0" VerticalAlignment="Top" Width="537" Visibility="Visible">
+            <Label x:Name="label6" Content="CPF:" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label10" Content="Nome:" HorizontalAlignment="Left" Margin="37,41,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label18" Content="Materia:" HorizontalAlignment="Left" Margin="37,73,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="84,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="142"/>
+            <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="23" Margin="87,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="287"/>
+            <ComboBox x:Name="comboBox13" HorizontalAlignment="Left" Margin="95,77,0,0" VerticalAlignment="Top" Width="164"/>
+            <Button x:Name="button5" Content="Procurar" HorizontalAlignment="Left" Margin="252,16,0,0" VerticalAlignment="Top" Width="75" Click="button5_Click"/>
+            <Button x:Name="button6" Content="Cadastrar" HorizontalAlignment="Left" Margin="299,79,0,0" VerticalAlignment="Top" Width="75" Click="button6_Click"/>
 
         </Grid>
         

@@ -30,25 +30,52 @@ namespace Login
         {
             foi = true;
         }
-        void Encher_materia()
+        void Enther_nome(int cpf)
         {
-            comboBox5.Items.Clear();
+            System.Data.DataSet tb = new System.Data.DataSet();
+            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            con.Open();
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT nome FROM aluno WHERE cpf = "+cpf+"", con);
+            da.Fill(tb, "0");
+            if (tb.Tables["0"].Rows.Count > 0)
+            {
+                textBox15.Text = tb.Tables["0"].Rows[0]["nome"].ToString();
+                Encher_materia(2);
+                comboBox13.IsEnabled = true;
+            }
+            else MessageBox.Show("Erro! CPF não encontrado!");
+        }
+        void Encher_materia(int ab)
+        {
             System.Data.DataSet tb = new System.Data.DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
             OleDbDataAdapter da = new OleDbDataAdapter("SELECT m.titulo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso", con);
             da.Fill(tb, "0");
             int a = 0;
-            while (tb.Tables["0"].Rows.Count > a)
+            if (ab == 0)
             {
-                comboBox5.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString());
-                a++;
+                comboBox5.Items.Clear();
+                while (tb.Tables["0"].Rows.Count > a)
+                {
+                    comboBox5.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString());
+                    a++;
+                }
+            }
+            else
+            {
+                comboBox13.Items.Clear();
+                while (tb.Tables["0"].Rows.Count > a)
+                {
+                    comboBox13.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString());
+                    a++;
+                }
             }
             con.Close();
         }
         void Encher_curso(int b)
         {
-            comboBox9.Items.Clear();
+            
             System.Data.DataSet tb = new System.Data.DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
@@ -56,20 +83,31 @@ namespace Login
             da.Fill(tb, "0");
             int a = 0;
             if (b == 1)
-            while (tb.Tables["0"].Rows.Count > a)
             {
-                comboBox9.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString()+"-"+ tb.Tables["0"].Rows[a]["periodo"].ToString());
-                a++;
+                comboBox9.Items.Clear();
+                while (tb.Tables["0"].Rows.Count > a)
+                {
+                    comboBox9.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString() + "-" + tb.Tables["0"].Rows[a]["periodo"].ToString());
+                    a++;
+                }
             }
-            else if(b==2)
-            while (tb.Tables["0"].Rows.Count > a)
+            else if (b == 2)
             {
-                comboBox10.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString() + "-" + tb.Tables["0"].Rows[a]["periodo"].ToString());
-                a++;
+                comboBox10.Items.Clear();
+                while (tb.Tables["0"].Rows.Count > a)
+                {
+                    comboBox10.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString() + "-" + tb.Tables["0"].Rows[a]["periodo"].ToString());
+                    a++;
+                }
             }
-            else
+            else if (b == 3)
             {
-                comboBox11.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString() + "-" + tb.Tables["0"].Rows[a]["periodo"].ToString());
+                comboBox11.Items.Clear();
+                while (tb.Tables["0"].Rows.Count > a)
+                {
+                    comboBox11.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString() + "-" + tb.Tables["0"].Rows[a]["periodo"].ToString());
+                    a++;
+                }
             }
             con.Close();
         }
@@ -135,6 +173,8 @@ namespace Login
                         break;
                     case "Matricula":
                         tirar();
+                        textBox15.IsEnabled = false;
+                        comboBox13.IsEnabled = false;
                         Cad_matricula.Visibility = Visibility.Visible;
                         break;
                 }
@@ -255,7 +295,29 @@ namespace Login
             if (proffoi == true)
             {
                 comboBox5.IsEnabled = true;
-                Encher_materia();
+                Encher_materia(1);
+            }
+        }
+
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            Enther_nome(Convert.ToInt16(textBox1.Text));
+
+        }
+
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+            if (textBox1.Text == "") MessageBox.Show("Digite o CPF!");
+            else if (textBox15.Text == "") MessageBox.Show("Aluno não selecionado!");
+            else if (comboBox13.Text == "") MessageBox.Show("Selecione a matéria!");
+            else
+            {
+                //////{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ARRUMAR O BANCO DE DADOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}//////
+                BancodeDados("INSERT INTO matricula(cod_aluno, codigo_prof_mate, data_matricula, media) VALUES('" + captura("SELECT codigo FROM aluno WHERE cpf=" + Convert.ToInt16(textBox1.Text))+"'," + Convert.ToInt32(textBox26.Text) + "','" +  + ")");
+                textBox1.Text = "";
+                textBox15.Text = "";
+                comboBox13.Text = "";
+                MessageBox.Show("Materia cadastrada com sucesso!");
             }
         }
 
