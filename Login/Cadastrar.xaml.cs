@@ -332,10 +332,11 @@ namespace Login
             if (textBox1.Text == "") MessageBox.Show("Digite o CPF!");
             else if (textBox15.Text == "") MessageBox.Show("Aluno não selecionado!");
             else if (comboBox13.Text == "") MessageBox.Show("Selecione a matéria!");
+            else if (comboBox12.Text == "") MessageBox.Show("Selecione o professor!");
             else
             {
-                BancodeDados("INSERT INTO matricula(cod_aluno, codigo_prof_mate, data_matricula, media) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM aluno WHERE cpf='" + textBox1.Text+"'"))+","+ Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox9.Text.Split('-')[0] + "' AND periodo='" + comboBox9.Text.Split('-')[1]))+"," + DateTime.Now + ","+0+")");
-                textBox1.Text = "";textBox15.Text = "";comboBox13.Text = "";comboBox13.IsEnabled = false;comboBox12.IsEnabled = false;
+                BancodeDados("INSERT INTO matricula(cod_aluno, codigo_prof_mate, data_matricula, media) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM aluno WHERE cpf='" + textBox1.Text + "'")) + "," + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox9.Text.Split('-')[0] + "' AND periodo='" + comboBox9.Text.Split('-')[1])) + "," + DateTime.Now + "," + 0 + ")");
+                textBox1.Text = ""; textBox15.Text = ""; comboBox13.Text = ""; comboBox13.IsEnabled = false; comboBox12.IsEnabled = false;
                 MessageBox.Show("Matricula cadastrada com sucesso!");
             }
         }
