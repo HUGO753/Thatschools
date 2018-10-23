@@ -118,7 +118,8 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT pm.codigo, p.nome FROM prof_mate pm INNER JOIN professor p ON p.codigo=pm.cod_prof WHERE pm.cod_materia="+Convert.ToInt16(captura("SELECT codigo FROM materia WHERE titulo="+comboBox13.Text)), con);
+            /********************************    Arrumar essa parte*//////////////////
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.nome FROM prof_mate pm INNER JOIN professor p ON p.codigo=pm.cod_prof WHERE pm.cod_materia="+Convert.ToInt16(captura("SELECT codigo FROM materia WHERE titulo="+comboBox13.Text)), con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox12.Items.Clear();
@@ -348,12 +349,13 @@ namespace Login
 
         }
 
-        private void comboBox12_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void comboBox13_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             matfoi = true;
         }
 
-        private void comboBox12_DropDownClosed(object sender, EventArgs e)
+        private void comboBox13_DropDownClosed(object sender, EventArgs e)
         {
             if (matfoi == true)
             {
