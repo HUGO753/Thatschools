@@ -20,7 +20,7 @@ namespace Login
     /// </summary>
     public partial class Cadastrar : Window
     {
-        bool foi = false, proffoi = false;
+        bool foi = false, proffoi = false, matfoi = false;
         public Cadastrar()
         {
             InitializeComponent();
@@ -83,14 +83,16 @@ namespace Login
         }
         void Encher_materia(int ab)
         {
+            int a = 0;
             System.Data.DataSet tb = new System.Data.DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT m.titulo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso", con);
-            da.Fill(tb, "0");
-            int a = 0;
+            
+            
             if (ab == 1)
             {
+                OleDbDataAdapter da = new OleDbDataAdapter("SELECT m.titulo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE c.titulo = '"+comboBox10.Text.Split('-')[0]+ "' AND c.periodo='"+comboBox10.Text.Split('-')[1]+"';", con);
+                da.Fill(tb, "0");
                 comboBox5.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
                 {
@@ -100,6 +102,8 @@ namespace Login
             }
             else
             {
+                OleDbDataAdapter da = new OleDbDataAdapter("SELECT m.titulo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE "+captura("SELECT cod_curso FROM aluno WHERE CPF='"+ textBox1.Text+ "';")+"=c.codigo", con);
+                da.Fill(tb, "0");
                 comboBox13.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
                 {
@@ -109,15 +113,31 @@ namespace Login
             }
             con.Close();
         }
+        void Encher_professor()
+        {
+            System.Data.DataSet tb = new System.Data.DataSet();
+            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            con.Open();
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT pm.codigo, p.nome FROM prof_mate pm INNER JOIN professor p ON p.codigo=pm.cod_prof WHERE pm.cod_materia="+Convert.ToInt16(captura("SELECT codigo FROM materia WHERE titulo="+comboBox13.Text)), con);
+            da.Fill(tb, "0");
+            int a = 0;
+            comboBox12.Items.Clear();
+            while (tb.Tables["0"].Rows.Count > a)
+            {
+                comboBox12.Items.Add(tb.Tables["0"].Rows[a]["titulo"].ToString() + "-" + tb.Tables["0"].Rows[a]["periodo"].ToString());
+                a++;
+            }
+            proffoi = false;
+        }
         void Encher_curso(int b)
         {
-            
+            int a = 0;
             System.Data.DataSet tb = new System.Data.DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
             OleDbDataAdapter da = new OleDbDataAdapter("SELECT codigo, titulo, periodo FROM curso", con);
             da.Fill(tb, "0");
-            int a = 0;
+            
             if (b == 1)
             {
                 comboBox9.Items.Clear();
@@ -255,12 +275,13 @@ namespace Login
             else if (comboBox3.Text == "") MessageBox.Show("Insira o UF!");
             else if (comboBox10.Text == "") MessageBox.Show("Insira o Curso!");
             else if (comboBox5.Text == "") MessageBox.Show("Insira a Materia!");
+            else if (textBox9.Text == "") MessageBox.Show("Insira o Numero de Registro!");
             else if (MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                BancodeDados("INSERT INTO professor(nome,sexo,endereco,cidade,rg,cpf,uf) VALUES('" + textBox4.Text + "','" + comboBox4.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox5.Text + "','" + comboBox3.Text + "')");
-                BancodeDados("INSERT INTO usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox20.Text + "','" + textBox5.Text + "',2," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor"))+")");
-                BancodeDados("INSERT INTO prof_mate(cod_materia,cod_prof) VALUES("+ Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox10.Text.Split('-')[0] + "' AND periodo='" + comboBox10.Text.Split('-')[1] + "'")) + ","+Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor"))+")");
-                textBox4.Text = "";textBox6.Text = "";textBox7.Text = "";textBox8.Text = "";textBox9.Text = "";comboBox3.Text = "";comboBox4.Text = "";comboBox5.Text = "";textBox5.Text = "";textBox20.Text = "";comboBox10.Text = "";comboBox5.IsEnabled = false;proffoi = false;
+                BancodeDados("INSERT INTO professor(nome,sexo,endereco,cidade,rg,cpf,uf,N_Registro) VALUES('" + textBox4.Text + "','" + comboBox4.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox5.Text + "','" + comboBox3.Text + "',"+Convert.ToInt32(textBox9.Text)+ ")");
+                BancodeDados("INSERT INTO usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox20.Text + "','" + textBox5.Text + "',2," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor")) + ")");
+                BancodeDados("INSERT INTO prof_mate(cod_materia,cod_prof) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox10.Text.Split('-')[0] + "' AND periodo='" + comboBox10.Text.Split('-')[1] + "'")) + "," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor")) + ")");
+                textBox4.Text = ""; textBox6.Text = ""; textBox7.Text = ""; textBox8.Text = ""; textBox9.Text = ""; comboBox3.Text = ""; comboBox4.Text = ""; comboBox5.Text = ""; textBox5.Text = ""; textBox20.Text = ""; comboBox10.Text = ""; comboBox5.IsEnabled = false; proffoi = false;
                 MessageBox.Show("Cadastro realizado com sucesso!");
             }
         }
@@ -327,6 +348,20 @@ namespace Login
 
         }
 
+        private void comboBox12_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            matfoi = true;
+        }
+
+        private void comboBox12_DropDownClosed(object sender, EventArgs e)
+        {
+            if (matfoi == true)
+            {
+                comboBox12.IsEnabled = true;
+                Encher_professor();
+            }
+        }
+
         private void button6_Click(object sender, RoutedEventArgs e)
         {
             if (textBox1.Text == "") MessageBox.Show("Digite o CPF!");
@@ -335,7 +370,7 @@ namespace Login
             else if (comboBox12.Text == "") MessageBox.Show("Selecione o professor!");
             else
             {
-                BancodeDados("INSERT INTO matricula(cod_aluno, codigo_prof_mate, data_matricula, media) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM aluno WHERE cpf='" + textBox1.Text + "'")) + "," + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox9.Text.Split('-')[0] + "' AND periodo='" + comboBox9.Text.Split('-')[1])) + "," + DateTime.Now + "," + 0 + ")");
+                BancodeDados("INSERT INTO matricula(cod_aluno, codigo_prof_mate, data_matricula, media) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM aluno WHERE cpf='" + textBox1.Text + "'")) + "," + Convert.ToInt16(captura("SELECT pm.codigo FROM prof_mate pm INNER JOIN materia m ON pm.cod_materia = m.codigo INNER JOIN professor p ON pm.cod_prof=p.codigo WHERE m.titulo='" + comboBox13.Text.Split('-')[0] + "' AND p.nome='" + comboBox12.Text)) + "," + DateTime.Now + "," + 0 + ")");
                 textBox1.Text = ""; textBox15.Text = ""; comboBox13.Text = ""; comboBox13.IsEnabled = false; comboBox12.IsEnabled = false;
                 MessageBox.Show("Matricula cadastrada com sucesso!");
             }
