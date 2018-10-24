@@ -20,11 +20,24 @@ namespace Login
     /// <summary>
     /// Interaction logic for AProva.xaml
     /// </summary>
+   
     public partial class AProva : Window
     {
         int codigo,min,seg,codigo_prova;
         DispatcherTimer temp = new DispatcherTimer();
-        
+        string captura(string query)
+        {
+            string a;
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            OleDbCommand cmd = new OleDbCommand();
+
+            con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = query;
+            a = cmd.ExecuteScalar().ToString();
+            con.Close();
+            return a;
+        }
         public AProva(int cod)
         {
             
@@ -118,7 +131,7 @@ namespace Login
                 listadeprovas.IsEnabled = true;
                 temp.Stop();
                 OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-                OleDbCommand cmd = new OleDbCommand("INSERT INTO provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + codigo + "," + codigo_prova + ",'" + Texto.Text + "');");
+                OleDbCommand cmd = new OleDbCommand("INSERT INTO provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + captura("SELECT cod_tipo FROM usuarios WHERE codigo="+codigo) + "," + codigo_prova + ",'" + Texto.Text + "');");
                 cmd.Connection = con;
                 con.Open();
                 cmd.ExecuteNonQuery();

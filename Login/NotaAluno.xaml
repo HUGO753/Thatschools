@@ -8,10 +8,10 @@
         Title="NotaAluno" Height="469.149" Width="652.128">
     <Grid>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="300"/>
-         <StackPanel HorizontalAlignment="Left" Height="297" Margin="10,131,0,0" VerticalAlignment="Top" Width="624" Background="#FF959494"/>
-         <Label x:Name="label" Content="&lt;" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" FontSize="20"/>
-         <Label x:Name="label_Copy" Content="&gt;" HorizontalAlignment="Left" Margin="30,97,0,0" VerticalAlignment="Top" FontSize="20"/>
-         <Button x:Name="button" Content="Visualizar" HorizontalAlignment="Left" Margin="345,58,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
+         <StackPanel HorizontalAlignment="Left" Height="297" Margin="10,131,0,0" VerticalAlignment="Top" Width="624" Background="#FF959494">
+            <DataGrid Height="297"/>
+        </StackPanel>
+        <Button x:Name="button" Content="Visualizar" HorizontalAlignment="Left" Margin="345,58,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
         <Button x:Name="button1" Content="Fechar" HorizontalAlignment="Left" Margin="448,58,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
     </Grid>
 </Window>
