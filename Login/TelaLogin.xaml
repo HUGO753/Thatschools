@@ -5,19 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="That'school" Height="275.314" Width="281.904" ResizeMode="NoResize">
+        Title="That'school" Height="350.488" Width="416.632" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="tbusuario" HorizontalAlignment="Left" Height="23" Margin="34,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"/>
-        <PasswordBox x:Name="tbsenha" Margin="34,165,61,0" VerticalAlignment="Top" Height="20"/>
-        <Button x:Name="button" Content="Entrar" HorizontalAlignment="Left" Margin="159,198,0,0" VerticalAlignment="Top" Width="54" Height="26" Click="button_Click" IsDefault="True"/>
+        <TextBox x:Name="tbusuario" Height="23" Margin="70,198,103,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="tbsenha" Margin="70,230,103,0" VerticalAlignment="Top" Height="23"/>
+        <Button HorizontalAlignment="Left" Margin="323,251,0,0" VerticalAlignment="Top" Width="60" Height="55" Click="button_Click" IsDefault="True" BorderBrush="{x:Null}">
+            <StackPanel>
+                <Image Source="Images/loginImagem.png" />
+            </StackPanel>
+        </Button>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="34,278,0,0" TextWrapping="Wrap" Text="Esqueci a Senha" VerticalAlignment="Top" TextDecorations="Underline" Foreground="#FF0074FF" MouseLeftButtonDown="textBlock_MouseLeftButtonDown" MouseLeave="textBlock_MouseLeave" MouseEnter="textBlock_MouseEnter"/>
+        <Image x:Name="free_horizontal_on_white_by_logaster_png" Margin="55,0,74,237" Source="Images/free_horizontal_on_white_by_logaster.png" Stretch="Fill"/>
+        <Image x:Name="Nomeusuario_png" Margin="34,198,349,101" Source="Images/Nomeusuario.png" Stretch="Fill"/>
+        <Image x:Name="senha_png" Margin="34,230,349,69" Source="Images/senha.png" Stretch="Fill"/>
+        <Image x:Name="ImagemUsuario_png" Margin="147,75,182,166" Source="Images/ImagemUsuario.png" Stretch="Fill"/>
+        <Label x:Name="label" Content="Login" HorizontalAlignment="Left" Margin="163,156,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-        <Label x:Name="label1" Content="Usuario" HorizontalAlignment="Left" Margin="34,65,0,0" VerticalAlignment="Top" Height="26" Width="50"/>
-        <Label x:Name="label2" Content="Senha" HorizontalAlignment="Left" Margin="34,134,0,0" VerticalAlignment="Top" Height="26" Width="50"/>
-        <Image x:Name="logo_png" Margin="24,15,87,187" Source="logo.png" Stretch="Fill" RenderTransformOrigin="-0.045,0.36"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="34,208,0,0" TextWrapping="Wrap" Text="Esqueci a Senha" VerticalAlignment="Top" TextDecorations="Underline" Foreground="#FF0074FF" MouseLeftButtonDown="textBlock_MouseLeftButtonDown" MouseLeave="textBlock_MouseLeave" MouseEnter="textBlock_MouseEnter"/>
-   
     </Grid>
 </Window>

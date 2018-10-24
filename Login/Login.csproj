@@ -154,6 +154,26 @@
   <ItemGroup>
     <Resource Include="logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CorrecaoProva.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\free_horizontal_on_white_by_logaster.png" />
+    <Resource Include="Images\Image1.png" />
+    <Resource Include="Images\Image2.png" />
+    <Resource Include="Images\Imagecadastrar.png" />
+    <Resource Include="Images\ImagemLogin.png" />
+    <Resource Include="Images\ImagemUsuario.jpg" />
+    <Resource Include="Images\ImagemUsuario.png" />
+    <Resource Include="Images\ImageProva.png" />
+    <Resource Include="Images\loginImagem.png" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\Nomeusuario.png" />
+    <Resource Include="Images\senha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\lupa.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

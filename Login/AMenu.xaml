@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="AMenu" Height="346.753" Width="568.185">
+        Title="AMenu" Height="383.647" Width="661.17">
     <Grid>
-        <Button x:Name="B_prova" Content="Prova" HorizontalAlignment="Left" Margin="80,80,0,0" VerticalAlignment="Top" Width="80" Height="61" Click="B_prova_Click"/>
-
+        <Button HorizontalAlignment="Left" Margin="50,214,0,0" VerticalAlignment="Top" Width="122" Height="83" Click="B_prova_Click" FontSize="16" BorderBrush="White">
+            <StackPanel>
+                <Image Source="Images/ImageProva.png" />
+            </StackPanel>
+        </Button>
+        <Label x:Name="label" Content="Selecione a opção desejada:" HorizontalAlignment="Left" Margin="223,145,0,0" VerticalAlignment="Top" Height="35" Width="218" FontSize="16"/>
+        <Button HorizontalAlignment="Left" Margin="191,214,0,0" VerticalAlignment="Top" Width="104" Height="83" BorderBrush="#FFF7F7F7" Click="Button_Click" FontSize="14">
+            <StackPanel>
+                <Image Source="Images/lupa.png" />
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

@@ -16,7 +16,7 @@
             <ComboBoxItem Cursor="Hand" Content="Matricula"/>
         </ComboBox>
         <Label x:Name="label" Content="Selecione o tipo de usuário à cadastrar" HorizontalAlignment="Left" Margin="136,15,0,0" VerticalAlignment="Top" Width="219" Height="26"/>
-        <Grid x:Name="Cad_aluno" HorizontalAlignment="Left" Height="252" Margin="10,108,0,0" VerticalAlignment="Top" Width="537" UseLayoutRounding="False" Visibility="Hidden">
+        <Grid x:Name="Cad_aluno" HorizontalAlignment="Left" Height="252" Margin="10,108,0,0" VerticalAlignment="Top" Width="537" UseLayoutRounding="False" Visibility="Visible">
             <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="129,19,134,210"/>
             <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="129,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="129,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -112,7 +112,7 @@
             <Label x:Name="label16" Content="Curso" HorizontalAlignment="Left" Margin="50,151,0,0" VerticalAlignment="Top"/>
             <Button x:Name="button4" Content="Cadastrar" HorizontalAlignment="Left" Margin="397,43,0,0" VerticalAlignment="Top" Width="75" Click="button4_Click"/>
         </Grid>
-        <Grid x:Name="Cad_matricula" HorizontalAlignment="Left" Height="218" Margin="10,142,0,0" VerticalAlignment="Top" Width="537" Visibility="Visible">
+        <Grid x:Name="Cad_matricula" HorizontalAlignment="Left" Height="218" Margin="10,142,0,0" VerticalAlignment="Top" Width="537" Visibility="Hidden">
             <Label x:Name="label6" Content="CPF:" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label10" Content="Nome:" HorizontalAlignment="Left" Margin="37,41,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label18" Content="Materia:" HorizontalAlignment="Left" Margin="37,73,0,0" VerticalAlignment="Top"/>

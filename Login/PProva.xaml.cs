@@ -21,11 +21,40 @@ namespace Login
     /// </summary>
     public partial class PProva : Window
     {
+        string captura(string query)
+        {
+            string a;
+            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            OleDbCommand cmd = new OleDbCommand();
+
+            con.Open();
+            cmd.Connection = con;
+            cmd.CommandText = query;
+            a = cmd.ExecuteScalar().ToString();
+            con.Close();
+            return a;
+        }
         int codigo;
+        void encherCombo()
+        {
+            System.Data.DataSet tb = new System.Data.DataSet();
+            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            con.Open();
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT ma.titulo, ma.codigo FROM materia ma INNER JOIN prof_mate pm ON ma.codigo=pm.cod_materia WHERE pm.cod_prof="+ captura("SELECT cod_tipo FROM usuarios WHERE cod="+codigo), con);
+            da.Fill(tb, "0"); 
+            int a = 0;
+            comboBox1.Items.Clear();
+            while (tb.Tables["0"].Rows.Count > a)
+            {
+                comboBox1.Items.Add(tb.Tables["0"].Rows[a]["codigo"].ToString() + "-" + tb.Tables["0"].Rows[a]["titulo"].ToString());
+                a++;
+            }
+        }
         public PProva(int cod)
         {
             codigo = cod;
             InitializeComponent();
+            encherCombo();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -49,15 +78,12 @@ namespace Login
                 }
                 else
                 {
-                    OleDbCommand cmd = new OleDbCommand("INSERT INTO prova(codigo_prof,titulo,texto,tempo) VALUES (" + codigo + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ")");
+                    OleDbCommand cmd = new OleDbCommand("INSERT INTO prova(codigo_prof,titulo,texto,tempo) VALUES (" + captura("SELECT codigo FROM prof_mate WHERE cod_prof="+ captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo)+" AND cod_materia="+comboBox1.Text.Split('-')[0]) + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ")");
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    Titulo.Text = "";
-                    Texto.Text = "";
-                    tp_hr.Text = "00";
-                    tp_mn.Text = "00";
+                    Titulo.Text = "";Texto.Text = "";tp_hr.Text = "00";tp_mn.Text = "00";comboBox1.Text = "";
                     MessageBox.Show("Inserido com sucesso!");
                 }
             }
@@ -76,6 +102,12 @@ namespace Login
                     MessageBox.Show("Insira o tempo de prova!");
                 }
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            PMenu a = new PMenu(codigo);
+            a.Show();
         }
     }
 }

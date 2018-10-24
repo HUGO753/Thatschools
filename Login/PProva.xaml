@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="PProva" Height="342.857" Width="530.252">
+        Title="PProva" Height="342.857" Width="530.252" Closed="Window_Closed">
     <Grid>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="136" IsEnabled="False"/>
         <TextBox x:Name="Titulo" HorizontalAlignment="Left" Height="23" Margin="157,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357"/>
@@ -20,13 +20,14 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Button x:Name="button" Content="Anexar" HorizontalAlignment="Left" Margin="18,120,0,0" VerticalAlignment="Top" Width="116" Height="27" Click="button_Click" IsEnabled="False"/>
-        <Button x:Name="button_Copy" Content="Alterar" HorizontalAlignment="Left" Margin="18,159,0,0" VerticalAlignment="Top" Width="116" Height="28" IsEnabled="False"/>
-        <Button x:Name="button_Copy1" Content="Enviar" HorizontalAlignment="Left" Margin="18,200,0,0" VerticalAlignment="Top" Width="116" Height="26" Click="button_Copy1_Click"/>
+        <Button x:Name="button" Content="Anexar" HorizontalAlignment="Left" Margin="18,168,0,0" VerticalAlignment="Top" Width="116" Height="27" Click="button_Click" IsEnabled="False"/>
+        <Button x:Name="button_Copy" Content="Alterar" HorizontalAlignment="Left" Margin="18,200,0,0" VerticalAlignment="Top" Width="116" Height="28" IsEnabled="False"/>
+        <Button x:Name="button_Copy1" Content="Enviar" HorizontalAlignment="Left" Margin="18,233,0,0" VerticalAlignment="Top" Width="116" Height="26" Click="button_Copy1_Click"/>
         <TextBox x:Name="tp_hr" HorizontalAlignment="Left" Height="19" Margin="52,86,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="23" MaxLines="1" MaxLength="2"/>
         <TextBox x:Name="tp_mn" HorizontalAlignment="Left" Height="19" Margin="85,86,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="23" MaxLines="1" MaxLength="2"/>
         <Label x:Name="label4" Content=":" HorizontalAlignment="Left" Margin="74,82,0,0" VerticalAlignment="Top" Width="12"/>
         <TextBox x:Name="Texto" HorizontalAlignment="Left" Height="220" Margin="157,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355" AcceptsReturn="True"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="18,113,0,0" VerticalAlignment="Top" Width="116"/>
 
     </Grid>
 </Window>

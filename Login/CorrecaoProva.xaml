@@ -5,17 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="CorrecaoProva" Height="479.787" Width="737.234">
+        Title="CorrecaoProva" Height="479.787" Width="737.234" Closed="Window_Closed">
     <Grid>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="191"/>
-        <StackPanel HorizontalAlignment="Left" Height="360" Margin="206,79,0,0" VerticalAlignment="Top" Width="513" Background="#FF999696"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="328,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272"/>
-        <Label x:Name="label" Content="Nome do aluno:" HorizontalAlignment="Left" Margin="218,24,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button x:Name="button" Content="Avaliar" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" Width="118" Height="37" FontSize="16"/>
+        <ComboBox x:Name="comboBox" DropDownClosed="comboBox_DropDownClosed" SelectionChanged="comboBox_SelectionChanged" Text="Prova" IsReadOnly="True" IsEditable="true" HorizontalAlignment="Left" Margin="408,25,0,0" VerticalAlignment="Top" Width="311"/>
+        <TextBox x:Name="Texto" IsReadOnly="True" HorizontalAlignment="Left" Height="360" Margin="206,79,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Width="513" AcceptsReturn="True"/>
+        <Button x:Name="button" Content="Avaliar" HorizontalAlignment="Left" Margin="40,240,0,0" VerticalAlignment="Top" Width="118" Height="37" FontSize="16" Click="button_Click"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="67,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68"/>
         <Label x:Name="label_Copy" Content="Nota:" HorizontalAlignment="Left" Margin="8,122,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label x:Name="label_Copy1" Content="&lt;" HorizontalAlignment="Left" Margin="79,197,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy2" Content="&gt;" HorizontalAlignment="Left" Margin="102,197,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button1" Content="Pesquisar" HorizontalAlignment="Left" Margin="624,31,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
+        <ComboBox x:Name="comboBox1" DropDownClosed="comboBox1_DropDownClosed" SelectionChanged="comboBox1_SelectionChanged" Text="Aluno" IsReadOnly="True" IsEditable="true" HorizontalAlignment="Left" Margin="206,52,0,0" VerticalAlignment="Top" Width="513"/>
+        <ComboBox x:Name="comboBox2" DropDownClosed="comboBox2_DropDownClosed" SelectionChanged="comboBox2_SelectionChanged" Text="Materia" IsReadOnly="True" IsEditable="true" HorizontalAlignment="Left" Margin="206,25,0,0" VerticalAlignment="Top" Width="197"/>
     </Grid>
 </Window>
