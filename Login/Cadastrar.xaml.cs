@@ -20,10 +20,11 @@ namespace Login
     /// </summary>
     public partial class Cadastrar : Window
     {
-        bool foi = false, proffoi = false, matfoi = false;
-        public Cadastrar()
+        bool foi = false, proffoi = false, matfoi = false; int codigo;
+        public Cadastrar(int cod)
         {
             InitializeComponent();
+            codigo = cod;
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -361,6 +362,12 @@ namespace Login
                 comboBox12.IsEnabled = true;
                 Encher_professor();
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            SMenu s = new SMenu(codigo);
+            s.Show();
         }
 
         private void button6_Click(object sender, RoutedEventArgs e)

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="Cadastrar" Height="401.064" Width="564.894">
+        Title="Cadastrar" Height="401.064" Width="564.894" Closed="Window_Closed">
     <Grid>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="186,46,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBox_SelectionChanged" DropDownClosed="comboBox_DropDownClosed">
             <ComboBoxItem Content="Aluno"/>

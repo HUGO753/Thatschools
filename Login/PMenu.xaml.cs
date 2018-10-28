@@ -19,7 +19,7 @@ namespace Login
     /// </summary>
     public partial class PMenu : Window
     {
-        int codigo;
+        int codigo; bool sair = true;
         public PMenu(int cod)
         {
             InitializeComponent();
@@ -30,6 +30,7 @@ namespace Login
         {
             PProva prova = new PProva(codigo);
             prova.Show();
+            sair = false;
             this.Close();
         }
 
@@ -37,7 +38,21 @@ namespace Login
         {
             CorrecaoProva a = new CorrecaoProva(codigo);
             a.Show();
+            sair = false;
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (sair)
+            {
+                if (MessageBox.Show("Deseja Sair?", "Sair", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    MainWindow a = new MainWindow();
+                    a.Show();
+                }
+                else e.Cancel = true;
+            }
         }
     }
 }

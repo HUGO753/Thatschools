@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="AMenu" Height="383.647" Width="661.17">
+        Title="AMenu" Height="383.647" Width="661.17" Closing="Window_Closing">
     <Grid>
         <Button HorizontalAlignment="Left" Margin="50,214,0,0" VerticalAlignment="Top" Width="122" Height="83" Click="B_prova_Click" FontSize="16" BorderBrush="White">
             <StackPanel>

@@ -34,7 +34,7 @@ namespace Login
             con.Open();
             cmd.Connection = con;
             cmd.CommandText = query;
-            a = cmd.ExecuteScalar().ToString();
+           a = cmd.ExecuteScalar().ToString();
             con.Close();
             return a;
         }
@@ -91,7 +91,7 @@ namespace Login
             DataSet tb = new DataSet();
             OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.titulo FROM (prova p LEFT JOIN provasfinalizadas pf ON p.codigo=pf.codigo_prova) INNER JOIN prof_mate pm ON pm.codigo=p.codigo_prof WHERE pf.codigo_prova IS NULL", con);
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.titulo FROM (prova p LEFT JOIN provasfinalizadas pf ON p.codigo=pf.codigo_prova) INNER JOIN prof_mate pm ON pm.codigo=p.codigo_prof WHERE (pf.codigo_aluno <> " + captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo) + " OR pf.codigo_prova IS NULL) AND pm.codigo =  " + captura("SELECT m.codigo_prof_mate FROM (matricula m INNER JOIN aluno a ON m.cod_aluno=a.codigo) INNER JOIN usuarios u ON u.cod_tipo=a.codigo WHERE u.cod=" + codigo), con);
             da.Fill(tb,"aluno");
             int a=0;
             while (tb.Tables["aluno"].Rows.Count > a)
@@ -131,7 +131,7 @@ namespace Login
                 listadeprovas.IsEnabled = true;
                 temp.Stop();
                 OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-                OleDbCommand cmd = new OleDbCommand("INSERT INTO provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + captura("SELECT cod_tipo FROM usuarios WHERE codigo="+codigo) + "," + codigo_prova + ",'" + Texto.Text + "');");
+                OleDbCommand cmd = new OleDbCommand("INSERT INTO provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + captura("SELECT cod_tipo FROM usuarios WHERE cod="+codigo) + "," + codigo_prova + ",'" + Texto.Text + "');");
                 cmd.Connection = con;
                 con.Open();
                 cmd.ExecuteNonQuery();
