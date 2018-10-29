@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="NotaAluno" Height="469.149" Width="652.128">
+        Title="NotaAluno" Height="469.149" Width="652.128" Closed="Window_Closed">
     <Grid>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="300"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="624" DropDownClosed="comboBox_DropDownClosed" SelectionChanged="comboBox_SelectionChanged"/>
          <StackPanel HorizontalAlignment="Left" Height="297" Margin="10,131,0,0" VerticalAlignment="Top" Width="624" Background="#FF959494">
-            <DataGrid Height="297"/>
+            <DataGrid x:Name="DadosNota" Height="297" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding titulo}" Header="Titulo da prova" Width="550"/>
+                    <DataGridTextColumn Binding="{Binding nota}" Header="Nota" Width="70"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
-        <Button x:Name="button" Content="Visualizar" HorizontalAlignment="Left" Margin="345,58,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
-        <Button x:Name="button1" Content="Fechar" HorizontalAlignment="Left" Margin="448,58,0,0" VerticalAlignment="Top" Width="75" FontSize="14"/>
+        <Label Content="Materia" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

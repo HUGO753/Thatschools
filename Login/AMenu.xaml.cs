@@ -36,7 +36,10 @@ namespace Login
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            NotaAluno a = new NotaAluno(codigo);
+            a.Show();
+            sair = false;
+            this.Close();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -50,5 +53,6 @@ namespace Login
                 else e.Cancel = true;
             }
         }
+
     }
 }
