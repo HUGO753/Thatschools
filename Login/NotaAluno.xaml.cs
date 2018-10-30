@@ -75,11 +75,6 @@ namespace Login
             Preencher();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            AMenu a = new AMenu(codigo);
-            a.Show();
-        }
 
         private void comboBox_DropDownClosed(object sender, EventArgs e)
         {
@@ -92,6 +87,12 @@ namespace Login
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foi = true;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            AMenu a = new AMenu(codigo);
+            a.Show();
         }
     }
 }

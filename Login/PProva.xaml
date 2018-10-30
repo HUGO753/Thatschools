@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="PProva" Height="342.857" Width="530.252" Closed="Window_Closed">
+        Title="PProva" Height="342.857" Width="530.252" Closing="Window_Closing">
     <Grid>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="136" IsEnabled="False"/>
         <TextBox x:Name="Titulo" HorizontalAlignment="Left" Height="23" Margin="157,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357"/>

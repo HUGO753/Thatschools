@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="NotaAluno" Height="469.149" Width="652.128" Closed="Window_Closed">
+        Title="NotaAluno" Height="469.149" Width="652.128" Closing="Window_Closing">
     <Grid>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="624" DropDownClosed="comboBox_DropDownClosed" SelectionChanged="comboBox_SelectionChanged"/>
          <StackPanel HorizontalAlignment="Left" Height="297" Margin="10,131,0,0" VerticalAlignment="Top" Width="624" Background="#FF959494">
