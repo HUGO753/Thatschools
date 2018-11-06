@@ -26,21 +26,37 @@ namespace Login
         {
             InitializeComponent();
         }
-
-        private void button_Click(object sender, RoutedEventArgs e)
+        void carregamento()
+        {
+            barra_uhu.Value = 0;
+            carregar.Visibility = Visibility.Visible;
+        }
+        void button_Click(object sender, RoutedEventArgs e)
         {
             if (tbusuario.Text !="" && tbsenha.Password != "")
             {
+                carregamento();
                 DataSet tb = new DataSet();
                 OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = "+ System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-
+                barra_uhu.Value += 10;
                 OleDbCommand cmd = con.CreateCommand();
                 con.Open();
-
+                barra_uhu.Value += 20;
                 OleDbDataAdapter da = new OleDbDataAdapter("SELECT tipo,cod FROM usuarios WHERE usuario='" + tbusuario.Text + "' AND senha='" + tbsenha.Password + "'", con);
                 da.Fill(tb, "0");
-                if (tb.Tables["0"].Rows.Count>0) switch (tb.Tables["0"].Rows[0]["tipo"].ToString()) { case "1": AMenu tela1 = new AMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela1.Show(); this.Close(); break; case "2": PMenu tela2 = new PMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela2.Show(); this.Close(); break; case "3": SMenu tela3 = new SMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela3.Show(); this.Close(); break; }
-                else MessageBox.Show("Não existes");
+                barra_uhu.Value += 30;
+                if (tb.Tables["0"].Rows.Count > 0)
+                {
+                    barra_uhu.Value += 40;
+                    carregar.Visibility = Visibility.Hidden;
+                    switch (tb.Tables["0"].Rows[0]["tipo"].ToString()) { case "1": AMenu tela1 = new AMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela1.Show(); this.Close(); break; case "2": PMenu tela2 = new PMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela2.Show(); this.Close(); break; case "3": SMenu tela3 = new SMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela3.Show(); this.Close(); break; }
+                    
+                }
+                else
+                {
+                    carregar.Visibility = Visibility.Hidden;
+                    MessageBox.Show("Não existes");
+                }
                 con.Close();
             }else
             {

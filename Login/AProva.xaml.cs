@@ -30,11 +30,10 @@ namespace Login
             string a;
             OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             OleDbCommand cmd = new OleDbCommand();
-
             con.Open();
             cmd.Connection = con;
             cmd.CommandText = query;
-           a = cmd.ExecuteScalar().ToString();
+            a = cmd.ExecuteScalar().ToString();
             con.Close();
             return a;
         }
@@ -102,6 +101,25 @@ namespace Login
             }
             con.Close();
         }
+        int warning = 0;
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.LeftAlt)
+            {
+                warning++;
+                MessageBox.Show("Você pressionou Alt ! warning:" + warning);
+            }
+            if (e.Key == Key.Tab)
+            {
+                warning++;
+                MessageBox.Show("Você pressionou tab ! warning:"+warning);
+            }
+            if (warning > 3)
+            {
+                MessageBox.Show("Dead");
+            }
+        }
+
         private void button_Click(object sender, RoutedEventArgs e)
         {
             DataSet tb = new DataSet();
@@ -141,5 +159,6 @@ namespace Login
                 limpar();
             }
         }
+
     }
 }

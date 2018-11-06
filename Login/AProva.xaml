@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="AProva" Height="331.933" Width="538.891" Closing="Window_Closing">
+        Title="AProva" Height="331.933" Width="538.891" Closing="Window_Closing" ResizeMode="NoResize" ShowInTaskbar="False" WindowState="Maximized" WindowStartupLocation="Manual" Topmost="True" KeyDown="Window_KeyDown">
     <Grid>
         <ComboBox x:Name="listadeprovas" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top" Width="136"/>
         <Label x:Name="label" Content="Titulo" HorizontalAlignment="Left" Margin="157,0,0,0" VerticalAlignment="Top"/>
@@ -19,10 +19,10 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Button x:Name="comecar" Content="Começar" HorizontalAlignment="Left" Margin="18,120,0,0" VerticalAlignment="Top" Width="116" Height="27" Click="button_Click"/>
-        <Button x:Name="Finalizar" Content="Finalizar" HorizontalAlignment="Left" Margin="18,262,0,0" VerticalAlignment="Top" Width="116" Height="26" Click="button_Copy1_Click" IsEnabled="False"/>
-        <TextBox x:Name="Texto" HorizontalAlignment="Left" Height="220" Margin="157,68,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Width="355" AcceptsReturn="True"/>
-        <TextBlock x:Name="Titulo" HorizontalAlignment="Left" Margin="157,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="355" Height="23"/>
+        <Button x:Name="comecar" Content="Começar" Margin="18,120,0,0" Click="button_Click" HorizontalAlignment="Left" Width="116" Height="27" VerticalAlignment="Top"/>
+        <Button x:Name="Finalizar" Content="Finalizar" Margin="18,0,0,16" Click="button_Copy1_Click" IsEnabled="False" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="116"/>
+        <TextBox x:Name="Texto" Margin="157,76,21,8" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+        <TextBlock x:Name="Titulo" Margin="0,26,21,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" HorizontalAlignment="Right" Width="355"/>
         <Label x:Name="tempo" Content="00:00" HorizontalAlignment="Left" Margin="56,89,0,0" VerticalAlignment="Top" Width="41"/>
 
     </Grid>
