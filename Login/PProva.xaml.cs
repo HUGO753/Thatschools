@@ -64,7 +64,7 @@ namespace Login
 
         private void button_Copy1_Click(object sender, RoutedEventArgs e)
         {
-            if ((Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) != 0 && Titulo.Text != "" && Texto.Text != "")
+            if ((Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) != 0 && Titulo.Text != "" && Texto.Text != "" && comboBox1.Text != "")
             {
                 DataSet tb = new DataSet();
                 OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
@@ -84,7 +84,7 @@ namespace Login
                     cmd.ExecuteNonQuery();
                     con.Close();
                     Titulo.Text = "";Texto.Text = "";tp_hr.Text = "00";tp_mn.Text = "00";comboBox1.Text = "";
-                    MessageBox.Show("Inserido com sucesso!");
+                    MessageBox.Show("Prova cadastrada com sucesso!");
                 }
             }
             else
@@ -95,9 +95,12 @@ namespace Login
                 }
                 else if (Texto.Text == "")
                 {
-                    MessageBox.Show("Insira o texto!");
+                    MessageBox.Show("Insira o texto da prova!");
                 }
-                else
+                else if(comboBox1.Text == "")
+                {
+                    MessageBox.Show("Insira a matéria da prova!");
+                }else
                 {
                     MessageBox.Show("Insira o tempo de prova!");
                 }

@@ -133,6 +133,7 @@ namespace Login
                 m = false;
                 p = false;
                 a = false;
+                MessageBox.Show("Nota inserida com sucesso!");
             }
         }
 
