@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,7 @@ namespace Login
     /// </summary>
     public partial class PProva : Window
     {
+        private OpenFileDialog abrir = null;
         string captura(string query)
         {
             string a;
@@ -54,12 +57,35 @@ namespace Login
         {
             codigo = cod;
             InitializeComponent();
+            abrir = new OpenFileDialog();
+            abrir.FileOk += abrirtexto;
             encherCombo();
         }
-
+        private void abrirtexto(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+                //throw new System.ArgumentException("Parameter cannot be null", "original");
+                TextReader leitor = null;
+                FileInfo info = new FileInfo(abrir.FileName);
+                Texto.Text = "";
+                leitor = info.OpenText();
+                // Lê linha por linha do arquivo e colocar ao controle "Conteudo.Text"
+                string line = leitor.ReadLine();
+                Titulo.Text = System.IO.Path.GetFileNameWithoutExtension(abrir.FileName);
+                while (line != null)
+                {
+                    Texto.Text += line;
+                    line = leitor.ReadLine();
+                    if (line != null)
+                    {
+                        Texto.Text += "\n";
+                    }
+                }
+                leitor.Close();
+        }
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            abrir.ShowDialog();
         }
 
         private void button_Copy1_Click(object sender, RoutedEventArgs e)

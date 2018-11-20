@@ -20,7 +20,7 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Button x:Name="button" Content="Anexar" HorizontalAlignment="Left" Margin="18,168,0,0" VerticalAlignment="Top" Width="116" Height="27" Click="button_Click" IsEnabled="False"/>
+        <Button x:Name="button" Content="Anexar" HorizontalAlignment="Left" Margin="18,168,0,0" VerticalAlignment="Top" Width="116" Height="27" Click="button_Click"/>
         <Button x:Name="button_Copy" Content="Alterar" HorizontalAlignment="Left" Margin="18,200,0,0" VerticalAlignment="Top" Width="116" Height="28" IsEnabled="False"/>
         <Button x:Name="button_Copy1" Content="Enviar" HorizontalAlignment="Left" Margin="18,233,0,0" VerticalAlignment="Top" Width="116" Height="26" Click="button_Copy1_Click"/>
         <TextBox x:Name="tp_hr" HorizontalAlignment="Left" Height="19" Margin="52,86,0,0" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="23" MaxLines="1" MaxLength="2"/>
