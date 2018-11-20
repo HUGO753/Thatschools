@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login"
         mc:Ignorable="d"
-        Title="CorrecaoProva" Height="479.787" Width="737.234" Closed="Window_Closed">
+        Title="CorrecaoProva" Height="479.787" Width="737.234" Closing="Window_Closing">
     <Grid>
         <ComboBox x:Name="comboBox" DropDownClosed="comboBox_DropDownClosed" SelectionChanged="comboBox_SelectionChanged" Text="Prova" IsReadOnly="True" IsEditable="true" HorizontalAlignment="Left" Margin="408,25,0,0" VerticalAlignment="Top" Width="311"/>
         <TextBox x:Name="Texto" IsReadOnly="True" HorizontalAlignment="Left" Height="360" Margin="206,79,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Width="513" AcceptsReturn="True"/>

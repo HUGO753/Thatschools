@@ -111,11 +111,6 @@ namespace Login
         }
 
 
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            PMenu a = new PMenu(codigo);
-            a.Show();
-        }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
@@ -166,6 +161,12 @@ namespace Login
             {
                 texto();
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            PMenu a = new PMenu(codigo);
+            a.Show();
         }
 
         private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
