@@ -1,0 +1,98 @@
+CREATE DATABASE tschoolbdts_usuarios;
+USE tschoolbd;
+
+CREATE TABLE ts_aluno(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+cod_curso INT NOT NULL,
+cidade VARCHAR(50) NOT NULL,
+cpf VARCHAR(11) NOT NULL,
+endereco VARCHAR(200) NOT NULL,
+nome VARCHAR(100) NOT NULL,
+rg VARCHAR(9) NOT NULL,
+sexo VARCHAR(9) NOT NULL,
+uf VARCHAR(2) NOT NULL
+);
+
+CREATE TABLE ts_curso(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+periodo VARCHAR(10) NOT NULL,
+qtd_aluno_s INT NOT NULL,
+titulo VARCHAR(32) NOT NULL
+);
+
+CREATE TABLE ts_materia(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+codigo_curso INT NOT NULL,
+carga_horaria INT NOT NULL,
+titulo VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE ts_matricula(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+cod_aluno INT NOT NULL,
+codigo_prof_mate INT NOT NULL,
+codigo_materia INT NOT NULL,
+data_matricula TIMESTAMP NOT NULL,
+media VARCHAR(4)
+);
+
+CREATE TABLE ts_prof_mate(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+cod_materia INT NOT NULL,
+cod_prof INT NOT NULL
+);
+
+CREATE TABLE ts_professor(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+N_registro VARCHAR(20) NOT NULL,
+cidade VARCHAR(50) NOT NULL,
+cpf VARCHAR(11) NOT NULL,
+endereco VARCHAR(200) NOT NULL,
+nome VARCHAR(100) NOT NULL,
+rg VARCHAR(9) NOT NULL,
+sexo VARCHAR(9) NOT NULL,
+uf VARCHAR(2) NOT NULL
+);
+
+CREATE TABLE ts_prova(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+codigo_prof INT NOT NULL,
+titulo VARCHAR(255) NOT NULL,
+texto TEXT NOT NULL,
+tempo INT NOT NULL
+);
+
+
+CREATE TABLE ts_provasavaliadas(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+cod_provafinalizada INT NOT NULL,
+nota INT NOT NULL
+);
+
+CREATE TABLE ts_provasfinalizadas(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+codigo_aluno INT NOT NULL,
+codigo_prova INT NOT NULL,
+texto TEXT NOT NULL,
+corrigida TINYINT NULL
+);
+
+CREATE TABLE ts_secretario(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+cidade VARCHAR(50) NOT NULL,
+cpf VARCHAR(11) NOT NULL,
+endereco VARCHAR(200) NOT NULL,
+nome VARCHAR(100) NOT NULL,
+rg VARCHAR(9) NOT NULL,
+sexo VARCHAR(9) NOT NULL,
+uf VARCHAR(2) NOT NULL
+);
+
+CREATE TABLE ts_usuarios(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+usuario VARCHAR(30) NOT NULL,
+senha VARCHAR(100) NOT NULL,
+tipo CHAR NOT NULL,
+cod_tipo INT NOT NULL
+);

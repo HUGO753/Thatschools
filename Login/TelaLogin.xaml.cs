@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace Login
 {
@@ -26,6 +27,10 @@ namespace Login
         {
             InitializeComponent();
         }
+        string dados()
+        {
+            return "server=localhost;user id=root;password=;database=tschoolbd";
+        }
         void carregamento()
         {
             barra_uhu.Value = 0;
@@ -37,19 +42,20 @@ namespace Login
             {
                 carregamento();
                 DataSet tb = new DataSet();
-                OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = "+ System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+                MySqlConnection con = new MySqlConnection(dados());
                 barra_uhu.Value += 10;
-                OleDbCommand cmd = con.CreateCommand();
+                MySqlCommand cmd = new MySqlCommand("SELECT tipo,codigo FROM ts_usuarios WHERE usuario='" + tbusuario.Text + "' AND senha='" + tbsenha.Password + "'", con);
                 con.Open();
                 barra_uhu.Value += 20;
-                OleDbDataAdapter da = new OleDbDataAdapter("SELECT tipo,cod FROM usuarios WHERE usuario='" + tbusuario.Text + "' AND senha='" + tbsenha.Password + "'", con);
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                da.SelectCommand = cmd;
                 da.Fill(tb, "0");
                 barra_uhu.Value += 30;
                 if (tb.Tables["0"].Rows.Count > 0)
                 {
                     barra_uhu.Value += 40;
                     carregar.Visibility = Visibility.Hidden;
-                    switch (tb.Tables["0"].Rows[0]["tipo"].ToString()) { case "1": AMenu tela1 = new AMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela1.Show(); this.Close(); break; case "2": PMenu tela2 = new PMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela2.Show(); this.Close(); break; case "3": SMenu tela3 = new SMenu((int)tb.Tables["0"].Rows[0]["cod"]); con.Close(); tela3.Show(); this.Close(); break; }
+                    switch (tb.Tables["0"].Rows[0]["tipo"].ToString()) { case "1": AMenu tela1 = new AMenu((int)tb.Tables["0"].Rows[0]["codigo"]); con.Close(); tela1.Show(); this.Close(); break; case "2": PMenu tela2 = new PMenu((int)tb.Tables["0"].Rows[0]["codigo"]); con.Close(); tela2.Show(); this.Close(); break; case "3": SMenu tela3 = new SMenu((int)tb.Tables["0"].Rows[0]["codigo"]); con.Close(); tela3.Show(); this.Close(); break; }
                     
                 }
                 else
@@ -62,24 +68,6 @@ namespace Login
             {
                 MessageBox.Show("Pow jamelão!");
             }
-        }
-
-
-        private void textBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("Ir para um lugar");
-        }
-
-        private void textBlock_MouseLeave(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Arrow;
-            textBlock.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF0074FF"));
-        }
-
-        private void textBlock_MouseEnter(object sender, MouseEventArgs e)
-        {
-            this.Cursor = Cursors.Hand;
-            textBlock.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF00AEFF"));
         }
     }
 }

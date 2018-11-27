@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,12 +25,15 @@ namespace Login
     public partial class PProva : Window
     {
         private OpenFileDialog abrir = null;
+        string dados()
+        {
+            return "server=localhost;user id=root;password=;database=tschoolbd";
+        }
         string captura(string query)
         {
             string a;
-            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-            OleDbCommand cmd = new OleDbCommand();
-
+            MySqlConnection con = new MySqlConnection(dados());
+            MySqlCommand cmd = new MySqlCommand("", con);
             con.Open();
             cmd.Connection = con;
             cmd.CommandText = query;
@@ -41,9 +45,9 @@ namespace Login
         void encherCombo()
         {
             System.Data.DataSet tb = new System.Data.DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection(dados());
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT ma.titulo, ma.codigo FROM materia ma INNER JOIN prof_mate pm ON ma.codigo=pm.cod_materia WHERE pm.cod_prof="+ captura("SELECT cod_tipo FROM usuarios WHERE cod="+codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT ma.titulo, ma.codigo FROM materia ma INNER JOIN prof_mate pm ON ma.codigo=pm.cod_materia WHERE pm.cod_prof=" + captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo), con);
             da.Fill(tb, "0"); 
             int a = 0;
             comboBox1.Items.Clear();
@@ -93,9 +97,9 @@ namespace Login
             if ((Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) != 0 && Titulo.Text != "" && Texto.Text != "" && comboBox1.Text != "")
             {
                 DataSet tb = new DataSet();
-                OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+                MySqlConnection con = new MySqlConnection(dados());
                 con.Open();
-                OleDbDataAdapter da = new OleDbDataAdapter("SELECT titulo, codigo_prof FROM prova WHERE titulo='"+Titulo.Text+"' AND codigo_prof =" + codigo + ";", con);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT titulo, codigo_prof FROM prova WHERE titulo='"+Titulo.Text+"' AND codigo_prof =" + codigo + ";", con);
                 da.Fill(tb, "professor");
                 con.Close();
                 if (tb.Tables["professor"].Rows.Count > 0)
@@ -104,7 +108,7 @@ namespace Login
                 }
                 else
                 {
-                    OleDbCommand cmd = new OleDbCommand("INSERT INTO prova(codigo_prof,titulo,texto,tempo) VALUES (" + captura("SELECT codigo FROM prof_mate WHERE cod_prof="+ captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo)+" AND cod_materia="+comboBox1.Text.Split('-')[0]) + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ")");
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO prova(codigo_prof,titulo,texto,tempo) VALUES (" + captura("SELECT codigo FROM prof_mate WHERE cod_prof="+ captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo)+" AND cod_materia="+comboBox1.Text.Split('-')[0]) + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ")");
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteNonQuery();
