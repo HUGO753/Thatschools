@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +28,8 @@ namespace Login
         string captura(string query)
         {
             string a;
-            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-            OleDbCommand cmd = new OleDbCommand();
+            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlCommand cmd = new MySqlCommand();
             con.Open();
             cmd.Connection = con;
             cmd.CommandText = query;
@@ -89,9 +89,9 @@ namespace Login
         {
             listadeprovas.Items.Clear();
             DataSet tb = new DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.titulo FROM (prova p LEFT JOIN provasfinalizadas pf ON p.codigo=pf.codigo_prova) INNER JOIN prof_mate pm ON pm.codigo=p.codigo_prof WHERE (pf.codigo_aluno <> " + captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo) + " OR pf.codigo_prova IS NULL) AND pm.codigo =  " + captura("SELECT m.codigo_prof_mate FROM (matricula m INNER JOIN aluno a ON m.cod_aluno=a.codigo) INNER JOIN usuarios u ON u.cod_tipo=a.codigo WHERE u.cod=" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.titulo FROM (prova p LEFT JOIN provasfinalizadas pf ON p.codigo=pf.codigo_prova) INNER JOIN prof_mate pm ON pm.codigo=p.codigo_prof WHERE (pf.codigo_aluno <> " + captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo) + " OR pf.codigo_prova IS NULL) AND pm.codigo =  " + captura("SELECT m.codigo_prof_mate FROM (matricula m INNER JOIN aluno a ON m.cod_aluno=a.codigo) INNER JOIN usuarios u ON u.cod_tipo=a.codigo WHERE u.cod=" + codigo), con);
             da.Fill(tb,"aluno");
             int a=0;
             while (tb.Tables["aluno"].Rows.Count > a)
@@ -123,10 +123,10 @@ namespace Login
         private void button_Click(object sender, RoutedEventArgs e)
         {
             DataSet tb = new DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0;Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection(@"Provider = Microsoft.ACE.OLEDB.12.0;Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
             con.Open();
             Titulo.Text = listadeprovas.Text;
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT codigo,texto,tempo FROM prova WHERE titulo='"+Titulo.Text+"';", con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT codigo,texto,tempo FROM prova WHERE titulo='"+Titulo.Text+"';", con);
             da.Fill(tb, "aluno");
             Texto.Text = tb.Tables["aluno"].Rows[0]["texto"].ToString();
             seg = Convert.ToInt32(tb.Tables["aluno"].Rows[0]["tempo"])%60;
@@ -149,8 +149,8 @@ namespace Login
                 comecar.IsEnabled = true;
                 listadeprovas.IsEnabled = true;
                 temp.Stop();
-                OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-                OleDbCommand cmd = new OleDbCommand("INSERT INTO provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + captura("SELECT cod_tipo FROM usuarios WHERE cod="+codigo) + "," + codigo_prova + ",'" + Texto.Text + "');");
+                MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + captura("SELECT cod_tipo FROM usuarios WHERE cod="+codigo) + "," + codigo_prova + ",'" + Texto.Text + "');");
                 cmd.Connection = con;
                 con.Open();
                 cmd.ExecuteNonQuery();

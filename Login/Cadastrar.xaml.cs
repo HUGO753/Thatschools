@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,9 +70,9 @@ namespace Login
         void Enther_nome(string cpf)
         {
             System.Data.DataSet tb = new System.Data.DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT nome FROM aluno WHERE cpf = '"+cpf+"'", con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT nome FROM aluno WHERE cpf = '"+cpf+"'", con);
             da.Fill(tb, "0");
             if (tb.Tables["0"].Rows.Count > 0)
             {
@@ -86,13 +86,13 @@ namespace Login
         {
             int a = 0;
             System.Data.DataSet tb = new System.Data.DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
             
             
             if (ab == 1)
             {
-                OleDbDataAdapter da = new OleDbDataAdapter("SELECT m.titulo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE c.titulo = '"+comboBox10.Text.Split('-')[0]+ "' AND c.periodo='"+comboBox10.Text.Split('-')[1]+"';", con);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE c.titulo = '"+comboBox10.Text.Split('-')[0]+ "' AND c.periodo='"+comboBox10.Text.Split('-')[1]+"';", con);
                 da.Fill(tb, "0");
                 comboBox5.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
@@ -103,7 +103,7 @@ namespace Login
             }
             else
             {
-                OleDbDataAdapter da = new OleDbDataAdapter("SELECT m.titulo, m.codigo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE "+captura("SELECT cod_curso FROM aluno WHERE CPF='"+ textBox1.Text+ "';")+"=c.codigo", con);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo, m.codigo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE "+captura("SELECT cod_curso FROM aluno WHERE CPF='"+ textBox1.Text+ "';")+"=c.codigo", con);
                 da.Fill(tb, "0");
                 comboBox13.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
@@ -117,9 +117,9 @@ namespace Login
         void Encher_professor()
         {
             System.Data.DataSet tb = new System.Data.DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.nome, p.codigo FROM prof_mate pm INNER JOIN professor p ON p.codigo=pm.cod_prof WHERE pm.cod_materia="+Convert.ToInt16(comboBox13.Text.Split('-')[0]), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.nome, p.codigo FROM prof_mate pm INNER JOIN professor p ON p.codigo=pm.cod_prof WHERE pm.cod_materia="+Convert.ToInt16(comboBox13.Text.Split('-')[0]), con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox12.Items.Clear();
@@ -134,9 +134,9 @@ namespace Login
         {
             int a = 0;
             System.Data.DataSet tb = new System.Data.DataSet();
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT codigo, titulo, periodo FROM curso", con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT codigo, titulo, periodo FROM curso", con);
             da.Fill(tb, "0");
             
             if (b == 1)
@@ -180,8 +180,8 @@ namespace Login
         string captura(string query)
         {
             string a;
-            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-            OleDbCommand cmd = new OleDbCommand();
+            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlCommand cmd = new MySqlCommand();
             
             con.Open();
             cmd.Connection = con;
@@ -192,8 +192,8 @@ namespace Login
         }
         void BancodeDados(string comando)
         {
-            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-            OleDbCommand cmd = new OleDbCommand(comando);
+            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlCommand cmd = new MySqlCommand(comando);
             cmd.Connection = con;
             con.Open();
             cmd.ExecuteNonQuery();

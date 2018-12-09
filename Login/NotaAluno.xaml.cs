@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,9 +29,9 @@ namespace Login
         void MostrarNota() {
             DataTable tb = new DataTable();
             
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT p.titulo, pa.nota FROM (prova p INNER JOIN provasfinalizadas pf on p.codigo=pf.codigo_prova) LEFT JOIN provasavaliadas pa ON pa.cod_provafinalizada=pf.codigo WHERE pf.codigo_aluno = "+captura("SELECT cod_tipo FROM usuarios WHERE cod =" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.titulo, pa.nota FROM (prova p INNER JOIN provasfinalizadas pf on p.codigo=pf.codigo_prova) LEFT JOIN provasavaliadas pa ON pa.cod_provafinalizada=pf.codigo WHERE pf.codigo_aluno = "+captura("SELECT cod_tipo FROM usuarios WHERE cod =" + codigo), con);
             DadosNota.Items.Clear();
             da.Fill(tb);
             DadosNota.ItemsSource = tb.DefaultView;
@@ -39,8 +39,8 @@ namespace Login
         string captura(string query)
         {
             string a;
-            OleDbConnection con = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
-            OleDbCommand cmd = new OleDbCommand();
+            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlCommand cmd = new MySqlCommand();
 
             con.Open();
             cmd.Connection = con;
@@ -55,9 +55,9 @@ namespace Login
             comboBox.Items.Clear();
             DataSet tb = new DataSet();
             
-            OleDbConnection con = new OleDbConnection(@"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("SELECT m.codigo,m.titulo FROM (materia m INNER JOIN prof_mate pm ON m.codigo=pm.cod_materia) INNER JOIN matricula ma ON pm.codigo=ma.codigo_prof_mate WHERE ma.cod_aluno="+captura("SELECT cod_tipo FROM usuarios WHERE cod =" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.codigo,m.titulo FROM (materia m INNER JOIN prof_mate pm ON m.codigo=pm.cod_materia) INNER JOIN matricula ma ON pm.codigo=ma.codigo_prof_mate WHERE ma.cod_aluno="+captura("SELECT cod_tipo FROM usuarios WHERE cod =" + codigo), con);
             da.Fill(tb, "aluno");
             int a = 0;
             while (tb.Tables["aluno"].Rows.Count > a)
