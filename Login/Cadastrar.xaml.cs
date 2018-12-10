@@ -92,7 +92,7 @@ namespace Login
             
             if (ab == 1)
             {
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo FROM ts_materia m INNER JOIN ts_curso c ON c.codigo=m.cod_curso WHERE c.titulo = '"+comboBox10.Text.Split('-')[0]+ "' AND c.periodo='"+comboBox10.Text.Split('-')[1]+"';", con);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo FROM ts_materia m INNER JOIN ts_curso c ON c.codigo=m.codigo_curso WHERE c.titulo = '" + comboBox10.Text.Split('-')[0]+ "' AND c.periodo='"+comboBox10.Text.Split('-')[1]+"';", con);
                 da.Fill(tb, "0");
                 comboBox5.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
@@ -103,7 +103,7 @@ namespace Login
             }
             else
             {
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo, m.codigo FROM ts_materia m INNER JOIN ts_curso c ON c.codigo=m.cod_curso WHERE "+captura("SELECT cod_curso FROM ts_aluno WHERE CPF='"+ textBox1.Text+ "';")+"=c.codigo", con);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo, m.codigo FROM ts_materia m INNER JOIN ts_curso c ON c.codigo=m.codigo_curso WHERE " + captura("SELECT cod_curso FROM ts_aluno WHERE CPF='"+ textBox1.Text+ "';")+"=c.codigo", con);
                 da.Fill(tb, "0");
                 comboBox13.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
@@ -280,8 +280,8 @@ namespace Login
             else if (MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 BancodeDados("INSERT INTO ts_professor(nome,sexo,endereco,cidade,rg,cpf,uf,N_Registro) VALUES('" + textBox4.Text + "','" + comboBox4.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox5.Text + "','" + comboBox3.Text + "',"+Convert.ToInt32(textBox9.Text)+ ")");
-                BancodeDados("INSERT INTO ts_usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox20.Text + "','" + textBox5.Text + "',2," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor")) + ")");
-                BancodeDados("INSERT INTO ts_prof_mate(cod_materia,cod_prof) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox10.Text.Split('-')[0] + "' AND periodo='" + comboBox10.Text.Split('-')[1] + "'")) + "," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM ts_professor")) + ")");
+                BancodeDados("INSERT INTO ts_usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox20.Text + "','" + textBox5.Text + "',2," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM ts_professor")) + ")");
+                BancodeDados("INSERT INTO ts_prof_mate(cod_materia,cod_prof) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM ts_curso WHERE titulo='" + comboBox10.Text.Split('-')[0] + "' AND periodo='" + comboBox10.Text.Split('-')[1] + "'")) + "," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM ts_professor")) + ")");
                 textBox4.Text = ""; textBox6.Text = ""; textBox7.Text = ""; textBox8.Text = ""; textBox9.Text = ""; comboBox3.Text = ""; comboBox4.Text = ""; comboBox5.Text = ""; textBox5.Text = ""; textBox20.Text = ""; comboBox10.Text = ""; comboBox5.IsEnabled = false; proffoi = false;
                 MessageBox.Show("Cadastro realizado com sucesso!");
             }
@@ -328,7 +328,7 @@ namespace Login
             else if (comboBox9.Text == "") MessageBox.Show("Selecione o curso!");
             else if(MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                BancodeDados("INSERT INTO ts_materia(titulo, cod_curso, carga_horaria) VALUES('" + textBox23.Text + "','" + Convert.ToInt16(captura("SELECT codigo FROM ts_curso WHERE titulo='"+ comboBox9.Text.Split('-')[0] + "' AND periodo='"+ comboBox9.Text.Split('-')[1] + "'")) + "'," + Convert.ToInt32(textBox26.Text) + ")");
+                BancodeDados("INSERT INTO ts_materia(titulo, codigo_curso, carga_horaria) VALUES('" + textBox23.Text + "','" + Convert.ToInt16(captura("SELECT codigo FROM ts_curso WHERE titulo='"+ comboBox9.Text.Split('-')[0] + "' AND periodo='"+ comboBox9.Text.Split('-')[1] + "'")) + "'," + Convert.ToInt32(textBox26.Text) + ")");
                 textBox23.Text = "";textBox26.Text = "";comboBox9.Text = "";
                 MessageBox.Show("Materia cadastrada com sucesso!");
             }

@@ -39,7 +39,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.codigo,m.titulo FROM ts_materia m INNER JOIN ts_prof_mate pm ON m.codigo=pm.cod_materia WHERE pm.cod_prof="+ captura("SELECT cod_tipo FROM ts_usuarios WHERE cod=" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.codigo,m.titulo FROM ts_materia m INNER JOIN ts_prof_mate pm ON m.codigo=pm.cod_materia WHERE pm.cod_prof="+ captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo=" + codigo), con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox2.Items.Clear();
@@ -92,7 +92,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.codigo,p.titulo FROM ts_prova p INNER JOIN ts_prof_mate pm ON p.codigo_prof=pm.codigo WHERE pm.cod_prof = " + captura("SELECT cod_tipo FROM ts_usuarios WHERE cod=" + codigo) + " AND pm.cod_materia=" + comboBox2.Text.Split('-')[0], con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.codigo,p.titulo FROM ts_prova p INNER JOIN ts_prof_mate pm ON p.codigo_prof=pm.codigo WHERE pm.cod_prof = " + captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo=" + codigo) + " AND pm.cod_materia=" + comboBox2.Text.Split('-')[0], con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox.Items.Clear();

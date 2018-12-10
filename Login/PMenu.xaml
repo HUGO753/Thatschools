@@ -18,6 +18,11 @@
                 <Image Source="Images/CorrecaoProva.png" />
             </StackPanel>
         </Button>
+        <Button HorizontalAlignment="Left" Margin="268,220,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_1" Height="82" FontSize="14" BorderBrush="#FFF9F9F9">
+            <StackPanel>
+                <Image Source="Images/prova-png-3.png" Height="78" />
+            </StackPanel>
+        </Button>
 
     </Grid>
 </Window>

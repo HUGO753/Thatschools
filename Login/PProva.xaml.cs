@@ -47,7 +47,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection(dados());
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT ma.titulo, ma.codigo FROM ts_materia ma INNER JOIN ts_prof_mate pm ON ma.codigo=pm.cod_materia WHERE pm.cod_prof=" + captura("SELECT cod_tipo FROM ts_usuarios WHERE cod=" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT ma.titulo, ma.codigo FROM ts_materia ma INNER JOIN ts_prof_mate pm ON ma.codigo=pm.cod_materia WHERE pm.cod_prof=" + captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo=" + codigo), con);
             da.Fill(tb, "0"); 
             int a = 0;
             comboBox1.Items.Clear();
@@ -108,7 +108,7 @@ namespace Login
                 }
                 else
                 {
-                    MySqlCommand cmd = new MySqlCommand("INSERT INTO ts_prova(codigo_prof,titulo,texto,tempo) VALUES (" + captura("SELECT codigo FROM ts_prof_mate WHERE cod_prof="+ captura("SELECT ts_cod_tipo FROM usuarios WHERE cod=" + codigo)+" AND cod_materia="+comboBox1.Text.Split('-')[0]) + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ")");
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO ts_prova(codigo_prof,titulo,texto,tempo,status) VALUES (" + captura("SELECT codigo FROM ts_prof_mate WHERE cod_prof="+ captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo=" + codigo)+" AND cod_materia="+comboBox1.Text.Split('-')[0]) + ",'" + Titulo.Text + "','" + Texto.Text + "'," + (Convert.ToInt32(tp_hr.Text) * 60 + Convert.ToInt32(tp_mn.Text)) + ",0)");
                     cmd.Connection = con;
                     con.Open();
                     cmd.ExecuteNonQuery();

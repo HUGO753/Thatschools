@@ -54,5 +54,13 @@ namespace Login
                 else e.Cancel = true;
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            PLiberar a = new PLiberar(codigo);
+            a.Show();
+            sair = false;
+            this.Close();
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace Login
             
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.titulo, pa.nota FROM ts_prova p INNER JOIN ts_provasfinalizadas pf on p.codigo=pf.codigo_prova LEFT JOIN ts_provasavaliadas pa ON pa.cod_provafinalizada=pf.codigo WHERE pf.codigo_aluno = "+captura("SELECT cod_tipo FROM ts_usuarios WHERE cod =" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.titulo, pa.nota FROM ts_prova p INNER JOIN ts_provasfinalizadas pf on p.codigo=pf.codigo_prova LEFT JOIN ts_provasavaliadas pa ON pa.cod_provafinalizada=pf.codigo WHERE pf.codigo_aluno = "+captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo =" + codigo), con);
             DadosNota.Items.Clear();
             da.Fill(tb);
             DadosNota.ItemsSource = tb.DefaultView;
@@ -57,7 +57,7 @@ namespace Login
             
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.codigo,m.titulo FROM ts_materia m INNER JOIN ts_prof_mate pm ON m.codigo=pm.cod_materia INNER JOIN ts_matricula ma ON pm.codigo=ma.codigo_prof_mate WHERE ma.cod_aluno="+captura("SELECT cod_tipo FROM ts_usuarios WHERE cod =" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.codigo,m.titulo FROM ts_materia m INNER JOIN ts_prof_mate pm ON m.codigo=pm.cod_materia INNER JOIN ts_matricula ma ON pm.codigo=ma.codigo_prof_mate WHERE ma.cod_aluno="+captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo =" + codigo), con);
             da.Fill(tb, "aluno");
             int a = 0;
             while (tb.Tables["aluno"].Rows.Count > a)

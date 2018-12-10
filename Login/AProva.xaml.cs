@@ -28,7 +28,7 @@ namespace Login
         string captura(string query)
         {
             string a;
-            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             MySqlCommand cmd = new MySqlCommand();
             con.Open();
             cmd.Connection = con;
@@ -91,7 +91,7 @@ namespace Login
             DataSet tb = new DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.titulo FROM ts_prova p LEFT JOIN ts_provasfinalizadas pf ON p.codigo=pf.codigo_prova INNER JOIN ts_prof_mate pm ON pm.codigo=p.codigo_prof WHERE (pf.codigo_aluno <> " + captura("SELECT cod_tipo FROM ts_usuarios WHERE cod=" + codigo) + " OR pf.codigo_prova IS NULL) AND pm.codigo =  " + captura("SELECT m.codigo_prof_mate FROM ts_matricula m INNER JOIN ts_aluno a ON m.cod_aluno=a.codigo INNER JOIN ts_usuarios u ON u.cod_tipo=a.codigo WHERE u.cod=" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.titulo FROM ts_prova p LEFT JOIN ts_provasfinalizadas pf ON p.codigo=pf.codigo_prova INNER JOIN ts_prof_mate pm ON pm.codigo=p.codigo_prof WHERE (pf.codigo_aluno != " + captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo=" + codigo) + " OR pf.codigo_prova IS NULL) AND p.status = 1 AND pm.codigo =  " + captura("SELECT m.codigo_prof_mate FROM ts_matricula m INNER JOIN ts_aluno a ON m.cod_aluno=a.codigo INNER JOIN ts_usuarios u ON u.cod_tipo=a.codigo WHERE u.codigo=" + codigo), con);
             da.Fill(tb,"aluno");
             int a=0;
             while (tb.Tables["aluno"].Rows.Count > a)
@@ -150,7 +150,7 @@ namespace Login
                 listadeprovas.IsEnabled = true;
                 temp.Stop();
                 MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO ts_provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + captura("SELECT cod_tipo FROM usuarios WHERE cod="+codigo) + "," + codigo_prova + ",'" + Texto.Text + "');");
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO ts_provasfinalizadas(codigo_aluno,codigo_prova,texto) VALUES (" + captura("SELECT cod_tipo FROM ts_usuarios WHERE codigo=" + codigo) + "," + codigo_prova + ",'" + Texto.Text + "');");
                 cmd.Connection = con;
                 con.Open();
                 cmd.ExecuteNonQuery();

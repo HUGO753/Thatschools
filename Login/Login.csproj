@@ -83,6 +83,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PLiberar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PProva.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +119,9 @@
     </Compile>
     <Compile Include="NotaAluno.xaml.cs">
       <DependentUpon>NotaAluno.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PLiberar.xaml.cs">
+      <DependentUpon>PLiberar.xaml</DependentUpon>
     </Compile>
     <Compile Include="PProva.xaml.cs">
       <DependentUpon>PProva.xaml</DependentUpon>
@@ -193,6 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DLL\MySql.Data.dll" />
+    <Resource Include="Images\prova-png-3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
