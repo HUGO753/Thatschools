@@ -72,7 +72,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT nome FROM aluno WHERE cpf = '"+cpf+"'", con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT nome FROM ts_aluno WHERE cpf = '"+cpf+"'", con);
             da.Fill(tb, "0");
             if (tb.Tables["0"].Rows.Count > 0)
             {
@@ -92,7 +92,7 @@ namespace Login
             
             if (ab == 1)
             {
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE c.titulo = '"+comboBox10.Text.Split('-')[0]+ "' AND c.periodo='"+comboBox10.Text.Split('-')[1]+"';", con);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo FROM ts_materia m INNER JOIN ts_curso c ON c.codigo=m.cod_curso WHERE c.titulo = '"+comboBox10.Text.Split('-')[0]+ "' AND c.periodo='"+comboBox10.Text.Split('-')[1]+"';", con);
                 da.Fill(tb, "0");
                 comboBox5.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
@@ -103,7 +103,7 @@ namespace Login
             }
             else
             {
-                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo, m.codigo FROM materia m INNER JOIN curso c ON c.codigo=m.cod_curso WHERE "+captura("SELECT cod_curso FROM aluno WHERE CPF='"+ textBox1.Text+ "';")+"=c.codigo", con);
+                MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.titulo, m.codigo FROM ts_materia m INNER JOIN ts_curso c ON c.codigo=m.cod_curso WHERE "+captura("SELECT cod_curso FROM ts_aluno WHERE CPF='"+ textBox1.Text+ "';")+"=c.codigo", con);
                 da.Fill(tb, "0");
                 comboBox13.Items.Clear();
                 while (tb.Tables["0"].Rows.Count > a)
@@ -119,7 +119,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.nome, p.codigo FROM prof_mate pm INNER JOIN professor p ON p.codigo=pm.cod_prof WHERE pm.cod_materia="+Convert.ToInt16(comboBox13.Text.Split('-')[0]), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.nome, p.codigo FROM ts_prof_mate pm INNER JOIN ts_professor p ON p.codigo=pm.cod_prof WHERE pm.cod_materia="+Convert.ToInt16(comboBox13.Text.Split('-')[0]), con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox12.Items.Clear();
@@ -136,7 +136,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT codigo, titulo, periodo FROM curso", con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT codigo, titulo, periodo FROM ts_curso", con);
             da.Fill(tb, "0");
             
             if (b == 1)
@@ -180,7 +180,7 @@ namespace Login
         string captura(string query)
         {
             string a;
-            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             MySqlCommand cmd = new MySqlCommand();
             
             con.Open();
@@ -192,7 +192,7 @@ namespace Login
         }
         void BancodeDados(string comando)
         {
-            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             MySqlCommand cmd = new MySqlCommand(comando);
             cmd.Connection = con;
             con.Open();
@@ -256,8 +256,8 @@ namespace Login
             else if (comboBox11.Text == "") MessageBox.Show("Insira o Curso!");
             else if(MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                BancodeDados("INSERT INTO aluno(nome,sexo,endereco,cidade,rg,cpf,uf,cod_curso) VALUES('" + textBox.Text + "','" + comboBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox17.Text + "','" + textBox16.Text + "','" + comboBox2.Text + "'," + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox11.Text.Split('-')[0] + "' AND periodo='" + comboBox11.Text.Split('-')[1]+"'"))+")");
-                BancodeDados("INSERT INTO usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox17.Text + "','" + textBox16.Text + "',1," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM aluno")) + ")");
+                BancodeDados("INSERT INTO ts_aluno(nome,sexo,endereco,cidade,rg,cpf,uf,cod_curso) VALUES('" + textBox.Text + "','" + comboBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox17.Text + "','" + textBox16.Text + "','" + comboBox2.Text + "'," + Convert.ToInt16(captura("SELECT codigo FROM ts_curso WHERE titulo='" + comboBox11.Text.Split('-')[0] + "' AND periodo='" + comboBox11.Text.Split('-')[1]+"'"))+")");
+                BancodeDados("INSERT INTO ts_usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox17.Text + "','" + textBox16.Text + "',1," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM ts_aluno")) + ")");
                 textBox.Text = "";comboBox1.Text = "";textBox2.Text = "";textBox3.Text = "";textBox17.Text = "";textBox16.Text = "";comboBox2.Text = "";comboBox11.Text = "";
                 MessageBox.Show("Cadastro realizado com sucesso!");
             }
@@ -279,9 +279,9 @@ namespace Login
             else if (textBox9.Text == "") MessageBox.Show("Insira o Numero de Registro!");
             else if (MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                BancodeDados("INSERT INTO professor(nome,sexo,endereco,cidade,rg,cpf,uf,N_Registro) VALUES('" + textBox4.Text + "','" + comboBox4.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox5.Text + "','" + comboBox3.Text + "',"+Convert.ToInt32(textBox9.Text)+ ")");
-                BancodeDados("INSERT INTO usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox20.Text + "','" + textBox5.Text + "',2," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor")) + ")");
-                BancodeDados("INSERT INTO prof_mate(cod_materia,cod_prof) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox10.Text.Split('-')[0] + "' AND periodo='" + comboBox10.Text.Split('-')[1] + "'")) + "," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor")) + ")");
+                BancodeDados("INSERT INTO ts_professor(nome,sexo,endereco,cidade,rg,cpf,uf,N_Registro) VALUES('" + textBox4.Text + "','" + comboBox4.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','" + textBox8.Text + "','" + textBox5.Text + "','" + comboBox3.Text + "',"+Convert.ToInt32(textBox9.Text)+ ")");
+                BancodeDados("INSERT INTO ts_usuarios(usuario,senha,tipo,cod_tipo) VALUES('" + textBox20.Text + "','" + textBox5.Text + "',2," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM professor")) + ")");
+                BancodeDados("INSERT INTO ts_prof_mate(cod_materia,cod_prof) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='" + comboBox10.Text.Split('-')[0] + "' AND periodo='" + comboBox10.Text.Split('-')[1] + "'")) + "," + Convert.ToInt16(captura("SELECT MAX(codigo) FROM ts_professor")) + ")");
                 textBox4.Text = ""; textBox6.Text = ""; textBox7.Text = ""; textBox8.Text = ""; textBox9.Text = ""; comboBox3.Text = ""; comboBox4.Text = ""; comboBox5.Text = ""; textBox5.Text = ""; textBox20.Text = ""; comboBox10.Text = ""; comboBox5.IsEnabled = false; proffoi = false;
                 MessageBox.Show("Cadastro realizado com sucesso!");
             }
@@ -300,8 +300,8 @@ namespace Login
             else if (comboBox7.Text == "") MessageBox.Show("Insira o UF!");
             else if(MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                BancodeDados("INSERT INTO secretario(nome,sexo,endereco,cidade,rg,cpf,uf) VALUES('"+ textBox10.Text+ "','" + comboBox6.Text + "','" + textBox12.Text + "','" + textBox13.Text + "','" + textBox14.Text + "','" + textBox21.Text + "','" + comboBox7.Text + "')");
-                BancodeDados("INSERT INTO usuarios(usuario,senha,tipo,cod_tipo) VALUES('"+textBox11.Text+"','"+textBox22.Text+ "',3,"+Convert.ToInt16(captura("SELECT MAX(codigo) FROM secretario")) +")");
+                BancodeDados("INSERT INTO ts_secretario(nome,sexo,endereco,cidade,rg,cpf,uf) VALUES('"+ textBox10.Text+ "','" + comboBox6.Text + "','" + textBox12.Text + "','" + textBox13.Text + "','" + textBox14.Text + "','" + textBox21.Text + "','" + comboBox7.Text + "')");
+                BancodeDados("INSERT INTO ts_usuarios(usuario,senha,tipo,cod_tipo) VALUES('"+textBox11.Text+"','"+textBox22.Text+ "',3,"+Convert.ToInt16(captura("SELECT MAX(codigo) FROM ts_secretario")) +")");
                 textBox10.Text = ""; textBox12.Text = ""; textBox13.Text = ""; textBox14.Text = ""; textBox21.Text = ""; textBox11.Text = ""; textBox22.Text = ""; comboBox6.Text = ""; comboBox7.Text = "";
                 MessageBox.Show("Cadastro realizado com sucesso!");
             }
@@ -315,7 +315,7 @@ namespace Login
             else if(textBox25.Text == "" || textBox25.Text == "0") MessageBox.Show("Insira a quantidade valida de alunos no curso!");
             else if (MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                BancodeDados("INSERT INTO curso(titulo, periodo, qtd_aluno_s) VALUES('" + textBox24.Text + "','" + comboBox8.Text + "'," + Convert.ToInt32(textBox25.Text) +")");
+                BancodeDados("INSERT INTO ts_curso(titulo, periodo, qtd_aluno_s) VALUES('" + textBox24.Text + "','" + comboBox8.Text + "'," + Convert.ToInt32(textBox25.Text) +")");
                 comboBox8.Text = "";textBox24.Text = "";textBox25.Text = "";
                 MessageBox.Show("Curso cadastrado com sucesso!");
             }
@@ -328,7 +328,7 @@ namespace Login
             else if (comboBox9.Text == "") MessageBox.Show("Selecione o curso!");
             else if(MessageBox.Show("Deseja Cadastrar?", "Cadastro", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                BancodeDados("INSERT INTO materia(titulo, cod_curso, carga_horaria) VALUES('" + textBox23.Text + "','" + Convert.ToInt16(captura("SELECT codigo FROM curso WHERE titulo='"+ comboBox9.Text.Split('-')[0] + "' AND periodo='"+ comboBox9.Text.Split('-')[1] + "'")) + "'," + Convert.ToInt32(textBox26.Text) + ")");
+                BancodeDados("INSERT INTO ts_materia(titulo, cod_curso, carga_horaria) VALUES('" + textBox23.Text + "','" + Convert.ToInt16(captura("SELECT codigo FROM ts_curso WHERE titulo='"+ comboBox9.Text.Split('-')[0] + "' AND periodo='"+ comboBox9.Text.Split('-')[1] + "'")) + "'," + Convert.ToInt32(textBox26.Text) + ")");
                 textBox23.Text = "";textBox26.Text = "";comboBox9.Text = "";
                 MessageBox.Show("Materia cadastrada com sucesso!");
             }
@@ -379,7 +379,7 @@ namespace Login
             else if (comboBox12.Text == "") MessageBox.Show("Selecione o professor!");
             else
             {
-                BancodeDados("INSERT INTO matricula(cod_aluno, codigo_prof_mate, data_matricula, media) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM aluno WHERE cpf='" + textBox1.Text + "'")) + "," + Convert.ToInt32(captura("SELECT codigo FROM prof_mate WHERE cod_materia=" + Convert.ToInt32(comboBox13.Text.Split('-')[0]) + " AND cod_prof=" + Convert.ToInt32(comboBox12.Text.Split('-')[0]))) + ",'" + DateTime.Now + "'," + 0 + ")");
+                BancodeDados("INSERT INTO ts_matricula(cod_aluno, codigo_prof_mate, data_matricula, media) VALUES(" + Convert.ToInt16(captura("SELECT codigo FROM ts_aluno WHERE cpf='" + textBox1.Text + "'")) + "," + Convert.ToInt32(captura("SELECT codigo FROM ts_prof_mate WHERE cod_materia=" + Convert.ToInt32(comboBox13.Text.Split('-')[0]) + " AND cod_prof=" + Convert.ToInt32(comboBox12.Text.Split('-')[0]))) + ",'" + DateTime.Now + "'," + 0 + ")");
                 textBox1.Text = ""; textBox15.Text = ""; comboBox13.Text = ""; comboBox13.IsEnabled = false; comboBox12.IsEnabled = false; comboBox12.Text="";
                 MessageBox.Show("Matricula cadastrada com sucesso!");
             }

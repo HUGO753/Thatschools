@@ -24,7 +24,7 @@ namespace Login
         string captura(string query)
         {
             string a;
-            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             MySqlCommand cmd = new MySqlCommand();
 
             con.Open();
@@ -39,7 +39,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.codigo,m.titulo FROM materia m INNER JOIN prof_mate pm ON m.codigo=pm.cod_materia WHERE pm.cod_prof="+ captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo), con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT m.codigo,m.titulo FROM ts_materia m INNER JOIN ts_prof_mate pm ON m.codigo=pm.cod_materia WHERE pm.cod_prof="+ captura("SELECT cod_tipo FROM ts_usuarios WHERE cod=" + codigo), con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox2.Items.Clear();
@@ -51,7 +51,7 @@ namespace Login
         }
         void nota(string comando)
         {
-            MySqlConnection con = new MySqlConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.IO.Directory.GetCurrentDirectory() + @"\..\..\..\bd.accdb"); // Conecta ao banco de dados
+            MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             MySqlCommand cmd = new MySqlCommand(comando);
             cmd.Connection = con;
             con.Open();
@@ -63,7 +63,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT a.nome, pf.codigo FROM aluno a INNER JOIN provasfinalizadas pf ON pf.codigo_aluno=a.codigo WHERE pf.corrigida=0 and pf.codigo_prova="+comboBox.Text.Split('-')[0], con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT a.nome, pf.codigo FROM ts_aluno a INNER JOIN ts_provasfinalizadas pf ON pf.codigo_aluno=a.codigo WHERE pf.corrigida=0 and pf.codigo_prova="+comboBox.Text.Split('-')[0], con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox1.Items.Clear();
@@ -78,7 +78,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT texto FROM provasfinalizadas where codigo="+comboBox1.Text.Split('-')[0], con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT texto FROM ts_provasfinalizadas where codigo="+comboBox1.Text.Split('-')[0], con);
             da.Fill(tb, "0");
             int a = 0;
             while (tb.Tables["0"].Rows.Count > a)
@@ -92,7 +92,7 @@ namespace Login
             System.Data.DataSet tb = new System.Data.DataSet();
             MySqlConnection con = new MySqlConnection("server=localhost;user id=root;password=;database=tschoolbd"); // Conecta ao banco de dados
             con.Open();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.codigo,p.titulo FROM prova p INNER JOIN prof_mate pm ON p.codigo_prof=pm.codigo WHERE pm.cod_prof = " + captura("SELECT cod_tipo FROM usuarios WHERE cod=" + codigo) + " AND pm.cod_materia=" + comboBox2.Text.Split('-')[0], con);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT p.codigo,p.titulo FROM ts_prova p INNER JOIN ts_prof_mate pm ON p.codigo_prof=pm.codigo WHERE pm.cod_prof = " + captura("SELECT cod_tipo FROM ts_usuarios WHERE cod=" + codigo) + " AND pm.cod_materia=" + comboBox2.Text.Split('-')[0], con);
             da.Fill(tb, "0");
             int a = 0;
             comboBox.Items.Clear();
@@ -118,8 +118,8 @@ namespace Login
             else if (textBox1.Text == "") MessageBox.Show("Insira a nota!");
             else if(MessageBox.Show("Deseja avaliar?", "Nota", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                nota("UPDATE provasfinalizadas SET corrigida = 1 WHERE codigo="+ comboBox1.Text.Split('-')[0]);
-                nota("INSERT INTO provasavaliadas(cod_provafinalizada,nota) VALUES ("+ comboBox1.Text.Split('-')[0] + ","+textBox1.Text+")");
+                nota("UPDATE ts_provasfinalizadas SET corrigida = 1 WHERE codigo="+ comboBox1.Text.Split('-')[0]);
+                nota("INSERT INTO ts_provasavaliadas(cod_provafinalizada,nota) VALUES ("+ comboBox1.Text.Split('-')[0] + ","+textBox1.Text+")");
                 comboBox1.Text = "Aluno";
                 comboBox.Text = "Prova";
                 comboBox2.Text = "Materia";
